@@ -15,4 +15,10 @@ hs_err_pid*
 *.settings
 *.properties
 
-.idea
+.idea/
+lib/
+bin/
+local.properties
+.classpath
+.settings/
+.loadpath
