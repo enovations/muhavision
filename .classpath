@@ -2,5 +2,49 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus-android-arm.jar"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus-android-x86.jar"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus-linux-x86.jar"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/artoolkitplus.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg-android-arm.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg-android-x86.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg-linux-x86.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/ffmpeg.jar"/>
+	<classpathentry kind="lib" path="lib/flycapture-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/flycapture-linux-x86.jar"/>
+	<classpathentry kind="lib" path="lib/flycapture-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/flycapture-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/flycapture.jar"/>
+	<classpathentry kind="lib" path="lib/javacpp.jar"/>
+	<classpathentry kind="lib" path="lib/javacv.jar"/>
+	<classpathentry kind="lib" path="lib/libdc1394-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/libdc1394-linux-x86.jar"/>
+	<classpathentry kind="lib" path="lib/libdc1394-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/libdc1394.jar"/>
+	<classpathentry kind="lib" path="lib/libfreenect-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/libfreenect-linux-x86.jar"/>
+	<classpathentry kind="lib" path="lib/libfreenect-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/libfreenect-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/libfreenect-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/libfreenect.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-android-arm.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-android-x86.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-linux-x86.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/opencv-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/opencv.jar"/>
+	<classpathentry kind="lib" path="lib/videoinput-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/videoinput-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/videoinput.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

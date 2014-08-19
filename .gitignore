@@ -15,10 +15,7 @@ hs_err_pid*
 *.settings
 *.properties
 
-<<<<<<< HEAD
 .idea
-/bin/
-=======
 .idea/
 lib/
 bin/
@@ -26,4 +23,3 @@ local.properties
 .classpath
 .settings/
 .loadpath
->>>>>>> origin/master
