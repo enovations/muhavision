@@ -1,4 +1,4 @@
-<b><b>MuhaVision</b></b> - Motherboard Universal Helicopter Aerodynamics
+MuhaVision - Motherboard Universal Helicopter Aerodynamics Vision
 ==========
 
 Program that controls quadcopter like muha controls itself. WARNING: QUADCOPTER IS PROBABLY GOING TO CRASH. Code is distributed under <a href="http://github.com/DzinVision/MuhaVision/blob/master/LICENSE">the MIT licence</a>.
