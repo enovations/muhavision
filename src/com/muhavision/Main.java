@@ -11,6 +11,7 @@
 package com.muhavision;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,11 +33,16 @@ public class Main {
 	
 	DroneController controller = new DroneController();
 	
+	public static final boolean DEBUG = false;
+	
 	public Main() {
 		
-		JToolBar commands = new JToolBar();
+		if(!DEBUG) new SplashScreen();
+		
+		JPanel commands = new JPanel();
 		
 		JButton takeoff = new JButton("Take off");
+		takeoff.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		takeoff.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -51,6 +57,7 @@ public class Main {
 		commands.add(takeoff);
 		
 		JButton land = new JButton("Land");
+		land.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		land.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
