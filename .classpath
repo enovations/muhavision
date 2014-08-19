@@ -47,5 +47,6 @@
 	<classpathentry kind="lib" path="lib/videoinput-windows-x86.jar"/>
 	<classpathentry kind="lib" path="lib/videoinput.jar"/>
 	<classpathentry kind="lib" path="lib/javadrone-api-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
