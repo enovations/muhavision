@@ -1,4 +1,4 @@
-<center><img src="http://raw.githubusercontent.com/DzinVision/MuhaVision/master/res/logo.png"></center>
+![alt tag](https://raw.githubusercontent.com/DzinVision/MuhaVision/master/res/logo.png)
 
 MuhaVision - Motherboard Universal Helicopter Aerodynamics Vision
 ==========
