@@ -153,14 +153,19 @@ public class Main {
 					String mami_data = mami_source.nextLine();
 					
 					String[] mami_array = mami_data.split(";");
-					float mami_pitch = Float.parseFloat(mami_array[1].trim());
-					float mami_roll = Float.parseFloat(mami_array[0].trim());
-					float mami_yaw = Float.parseFloat(mami_array[2].trim());
-					roll = (int)mami_roll;
-					pitch = (int)mami_pitch;
-					yaw = (int)mami_yaw;
 					
-					reloadControls();
+					if(mami_array.length>2){
+					
+						float mami_pitch = Float.parseFloat(mami_array[1].trim());
+						float mami_roll = Float.parseFloat(mami_array[0].trim());
+						float mami_yaw = Float.parseFloat(mami_array[2].trim());
+						roll = (int)mami_roll;
+						pitch = (int)mami_pitch;
+						yaw = (int)mami_yaw;
+					
+						reloadControls();
+					
+					}
 				}
 			}
 			
