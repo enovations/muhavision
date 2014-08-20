@@ -50,11 +50,24 @@ public class VisualRenderer extends JPanel{
 		else
 			g.drawImage(new ImageIcon("./res/nosignal.png").getImage(), 0, 0, 320, 240, this);
 		g.drawString("FPS: "+(int)avgFps, 30, 30);
+		g.setColor(Color.yellow);
+		g.drawLine(140, 50, 140, 190);
+		g.drawLine(180, 50, 180, 190);
 		g.setColor(Color.red);
 		if(speed!=null){
-			g.drawLine(100, 100, 100+(speed.x*2), 100);
-			g.drawLine(100, 101, 100+(speed.x*2), 101);
-			g.drawOval(100, 100, 5, 5);
+			g.drawLine(80, 80, 80+(speed.lx*2), 80);
+			g.drawLine(80, 81, 80+(speed.lx*2), 81);
+			g.drawOval(80, 80, 5, 5);
+			
+			g.drawLine(200, 80, 200+(speed.rx*2), 80);
+			g.drawLine(200, 81, 200+(speed.rx*2), 81);
+			g.drawOval(200, 80, 5, 5);
+			
+			g.setColor(Color.pink);
+			
+			g.drawLine(140, 140, 140+((speed.rx-speed.lx)), 140);
+			g.drawLine(141, 141, 141+((speed.rx-speed.lx)), 141);
+			g.drawOval(140, 140, 5, 5);
 		}
 		/*	g.setColor(Color.green);
 			int cnt = 0;

@@ -6,6 +6,6 @@ import com.codeminders.ardrone.Point;
 
 public class QuadrantFlowSpeed {
 	
-	public int x, y;
+	public int rx, ry, lx, ly;
 
 }

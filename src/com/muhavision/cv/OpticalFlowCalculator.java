@@ -147,18 +147,52 @@ public class OpticalFlowCalculator {
         		}
         	}
         
-        int avgl_x1 = avglx1_sum / vecltime;
-        int avgl_x2 = avglx2_sum / vecltime;
-        int avgl_y1 = avgly1_sum / vecltime;
-        int avgl_y2 = avgly2_sum / vecltime;
+        int avgrx1_sum = 0;
+        int avgry1_sum = 0;
+        int avgrx2_sum = 0;
+        int avgry2_sum = 0;
         
-        int vec_l_x = avgl_x1 - avgl_x2;
-        int vec_l_y = avgl_y1 - avgl_y2;
-		
+        int vecrtime = 0;
+        
+        if(right_number>0)
+        	for(VectorData point : right){
+        		int dx = Math.abs(point.x1 - point.x2);
+        		int dy = Math.abs(point.y1 - point.y2);
+        		float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+        		if((length/avgr)<5){
+        			avgrx1_sum += point.x1;
+        			avgrx2_sum += point.x2;
+        			avgry1_sum += point.y1;
+        			avgry2_sum += point.y2;
+        			vecrtime++;
+        		}
+        	}
+        
         QuadrantFlowSpeed speed = new QuadrantFlowSpeed();
         
-        speed.x = vec_l_x;
-        speed.y = vec_l_y;
+        if(!(vecltime<=0 || vecrtime<=0)){
+        	int avgl_x1 = avglx1_sum / vecltime;
+        	int avgl_x2 = avglx2_sum / vecltime;
+        	int avgl_y1 = avgly1_sum / vecltime;
+        	int avgl_y2 = avgly2_sum / vecltime;
+        	
+        	int avgr_x1 = avgrx1_sum / vecrtime;
+        	int avgr_x2 = avgrx2_sum / vecrtime;
+        	int avgr_y1 = avgry1_sum / vecrtime;
+        	int avgr_y2 = avgry2_sum / vecrtime;
+        
+        	int vec_l_x = avgl_x1 - avgl_x2;
+        	int vec_l_y = avgl_y1 - avgl_y2;
+        
+        	int vec_r_x = avgr_x1 - avgr_x2;
+        	int vec_r_y = avgr_y1 - avgr_y2;
+        
+        	speed.rx = vec_r_x;
+        	speed.ry = vec_r_y;
+        
+        	speed.lx = vec_l_x;
+        	speed.ly = vec_l_y;
+        }
         
         //speed.tmp1 = tmp1;
         //speed.tmp2 = tmp2;

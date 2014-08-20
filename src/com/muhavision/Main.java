@@ -19,6 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -39,6 +42,8 @@ public class Main {
 	DroneController controller = new DroneController(visual);
 	
 	public static final boolean DEBUG = true;
+	
+	int roll, pitch, yaw;
 	
 	public Main() {
 		
@@ -100,7 +105,15 @@ public class Main {
 		controlTowerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		controlTowerFrame.addKeyListener(new KeyListener() {	
 			@Override public void keyTyped(KeyEvent arg0) {}
-			@Override public void keyReleased(KeyEvent arg0) {}
+			@Override public void keyReleased(KeyEvent arg0) {
+				
+				if(arg0.getKeyChar()=='w') pitch = 0;
+				if(arg0.getKeyChar()=='s') pitch = 0;
+				if(arg0.getKeyChar()=='a') roll = 0;
+				if(arg0.getKeyChar()=='d') roll = 0;
+				
+				reloadControls();
+			}
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if(arg0.getKeyChar()=='\n')
@@ -117,13 +130,47 @@ public class Main {
 						e.printStackTrace();
 					}
 				}
+				
+				if(arg0.getKeyChar()=='w') pitch = 10;
+				if(arg0.getKeyChar()=='s') pitch = -10;
+				if(arg0.getKeyChar()=='a') roll = 10;
+				if(arg0.getKeyChar()=='d') roll = -10;
+				
+				reloadControls();
+				
 			}
+		});
+		
+		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				int x = arg0.getX();
+				int w = (int) controlTowerFrame.getSize().getWidth();
+				int relative = (w/2) - x;
+				if(Math.abs(relative)>50)
+					yaw = (relative - 50)/30;
+				else
+					yaw = 0;
+				
+				reloadControls();
+			}
+			
+			@Override public void mouseDragged(MouseEvent arg0) {}
 		});
 		
 		visual.reloadDatas(null, null);
 		visual.setDataProps(controlTowerFrame);
 	}
 	
+	protected void reloadControls() {
+		//System.out.println(pitch+" : "+roll+" : "+yaw);
+		try {
+			controller.getDrone().move(roll, pitch, 0, yaw);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+
 	public static void main(String[] args) {
 		new Main();
 
