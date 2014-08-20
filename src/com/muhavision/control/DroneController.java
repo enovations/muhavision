@@ -8,12 +8,15 @@ import com.codeminders.ardrone.ARDrone;
 import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.NavDataListener;
 import com.codeminders.ardrone.util.BufferedImageVideoListener;
+import com.muhavision.cv.OpticalFlowCalculator;
 import com.muhavision.cv.image.VisualRenderer;
 import com.muhavision.pid.PID;
 
 public class DroneController {
 	
 	PID roll = new PID(1, 1, 0, 10, PID.Direction.NORMAL);
+	
+	OpticalFlowCalculator calc = new OpticalFlowCalculator();
 	
 	ARDrone drone = null;
 	
@@ -34,6 +37,7 @@ public class DroneController {
 						e.printStackTrace();
 					}*/
 					visual.reloadDatas(image);
+					calc.getFlowData(image);
 				}
 			});
 			
