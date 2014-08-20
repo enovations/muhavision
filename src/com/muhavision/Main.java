@@ -27,14 +27,14 @@ import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
 import com.muhavision.control.DroneController;
-import com.muhavision.cv.image.VisualBuffer;
+import com.muhavision.cv.image.VisualRenderer;
 
 public class Main {
 	
 	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
 	
 	DroneController controller = new DroneController();
-	VisualBuffer visual = new VisualBuffer();
+	VisualRenderer visual = new VisualRenderer();
 	
 	public static final boolean DEBUG = true;
 	
@@ -47,6 +47,8 @@ public class Main {
 		commands.setBackground(Color.black);
 		
 		JButton takeoff = new JButton("Take off");
+		takeoff.setBackground(Color.black);
+		takeoff.setForeground(Color.white);
 		takeoff.setFont(new Font("Arial", Font.PLAIN, 17));
 		takeoff.addActionListener(new ActionListener() {
 			@Override
@@ -62,6 +64,8 @@ public class Main {
 		commands.add(takeoff);
 		
 		JButton land = new JButton("Land");
+		land.setBackground(Color.black);
+		land.setForeground(Color.white);
 		land.setFont(new Font("Arial", Font.PLAIN, 17));
 		land.addActionListener(new ActionListener() {
 			@Override
@@ -81,10 +85,7 @@ public class Main {
 		controlTowerFrame.setResizable(false);
 		//controlTowerFrame.setSize(700, 500);
 		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		controlTowerFrame.setUndecorated(true);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		controlTowerFrame.setLocation(dim.width/2-controlTowerFrame.getSize().width/2, 
-					dim.height/2-controlTowerFrame.getSize().height/2);		
+		controlTowerFrame.setUndecorated(true);	
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setFocusable(true);
 		controlTowerFrame.setFocusableWindowState(true);
@@ -113,10 +114,6 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		try{
-			UIManager.setLookAndFeel(
-		            UIManager.getSystemLookAndFeelClassName());
-		}catch(Exception e){}
 		new Main();
 	}
 
