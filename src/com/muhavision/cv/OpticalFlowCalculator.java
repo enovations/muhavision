@@ -19,7 +19,7 @@ public class OpticalFlowCalculator {
 	
 	BufferedImage prev = null;
 	
-	private static final int MAX_CORNERS = 500;
+	private static final int MAX_CORNERS = 190;
 	
 	public BufferedImage Equalize(BufferedImage bufferedimg)
     {
@@ -64,7 +64,7 @@ public class OpticalFlowCalculator {
 
         CvArr mask = null;
         cvGoodFeaturesToTrack(current, eig_image, tmp_image, cornersA,
-                corner_count, 0.05, 5.0, mask, 3, 0, 0.04);
+                corner_count, 0.01, 5.0, mask, 3, 0, 0.04);
         
         int win_size = 5;
         
@@ -88,23 +88,80 @@ public class OpticalFlowCalculator {
                 features_found, feature_errors,
                 cvTermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 20, 0.3), 0);
         
-        Vector<Point> tmp1 = new Vector<Point>();
-    	Vector<Point> tmp2 = new Vector<Point>();
+        Vector<VectorData> left = new Vector<VectorData>();
+    	Vector<VectorData> right = new Vector<VectorData>();
         
+    	float avgsum_left = 0;
+    	float left_number = 0;
+    	float avgsum_right = 0;
+    	float right_number = 0;
+    	
         for (int i = 0; i < corner_count.get(); i++) {
             if (features_found.get(i) == 0 || feature_errors.get(i) > 550) {
                 continue;
             }
             cornersA.position(i);
             cornersB.position(i);
-            tmp1.add(new Point((int)(cornersA.x()), (int)(cornersA.y())));
-            tmp2.add(new Point((int)(cornersB.x()), (int)(cornersB.y())));
+            int ax = (int) cornersA.x();
+            int ay = (int) cornersA.y();
+            int bx = (int) cornersB.x();
+            int by = (int) cornersB.y();
+            if(ax<100){
+            	left.add(new VectorData(ax, ay, bx, by));
+            	int dx = Math.abs(ax-bx);
+            	int dy = Math.abs(ay-by);
+            	float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+            	avgsum_left += length;
+            	left_number++;
+            }else if(ax>220){
+            	right.add(new VectorData(ax, ay, bx, by));
+            	int dx = Math.abs(ax-bx);
+            	int dy = Math.abs(ay-by);
+            	float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+            	avgsum_right += length;
+            	right_number++;
+            }
         }
+        
+        float avgl = avgsum_left/left_number;
+        float avgr = avgsum_right/right_number;
+        
+        int avglx1_sum = 0;
+        int avgly1_sum = 0;
+        int avglx2_sum = 0;
+        int avgly2_sum = 0;
+        
+        int vecltime = 0;
+        
+        if(left_number>0)
+        	for(VectorData point : left){
+        		int dx = Math.abs(point.x1 - point.x2);
+        		int dy = Math.abs(point.y1 - point.y2);
+        		float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+        		if((length/avgl)<5){
+        			avglx1_sum += point.x1;
+        			avglx2_sum += point.x2;
+        			avgly1_sum += point.y1;
+        			avgly2_sum += point.y2;
+        			vecltime++;
+        		}
+        	}
+        
+        int avgl_x1 = avglx1_sum / vecltime;
+        int avgl_x2 = avglx2_sum / vecltime;
+        int avgl_y1 = avgly1_sum / vecltime;
+        int avgl_y2 = avgly2_sum / vecltime;
+        
+        int vec_l_x = avgl_x1 - avgl_x2;
+        int vec_l_y = avgl_y1 - avgl_y2;
 		
         QuadrantFlowSpeed speed = new QuadrantFlowSpeed();
         
-        speed.tmp1 = tmp1;
-        speed.tmp2 = tmp2;
+        speed.x = vec_l_x;
+        speed.y = vec_l_y;
+        
+        //speed.tmp1 = tmp1;
+        //speed.tmp2 = tmp2;
         
         prev=curr;
         

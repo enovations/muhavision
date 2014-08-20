@@ -52,10 +52,11 @@ public class VisualRenderer extends JPanel{
 		g.drawString("FPS: "+(int)avgFps, 30, 30);
 		g.setColor(Color.red);
 		if(speed!=null){
-			for (Point p : speed.tmp1) {
-				g.drawOval(p.getX(), p.getY(), 3, 3);
-			}
-			g.setColor(Color.green);
+			g.drawLine(100, 100, 100+(speed.x*2), 100);
+			g.drawLine(100, 101, 100+(speed.x*2), 101);
+			g.drawOval(100, 100, 5, 5);
+		}
+		/*	g.setColor(Color.green);
 			int cnt = 0;
 			for (Point p : speed.tmp2) {
 				g.drawOval(p.getX(), p.getY(), 3, 3);
@@ -66,7 +67,7 @@ public class VisualRenderer extends JPanel{
 				g.drawLine(speed.tmp1.get(i).getX(), speed.tmp1.get(i).getY(), speed.tmp2.get(i).getX(), speed.tmp2.get(i).getY());
 			}
 			
-		}
+		}*/
 		g_panel.drawImage(bimage, 0, 0, getWidth(), getHeight(), this);
 	}
 

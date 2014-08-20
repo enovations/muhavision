@@ -37,6 +37,7 @@ public class DroneController {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}*/
+					//System.out.println("aae");
 					QuadrantFlowSpeed speed = calc.getFlowData(image);
 					visual.reloadDatas(image, speed);
 				}

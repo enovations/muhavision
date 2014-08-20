@@ -92,7 +92,7 @@ public class Main {
 		//controlTowerFrame.setResizable(false);
 		//controlTowerFrame.setSize(700, 500);
 		
-		controlTowerFrame.setUndecorated(true);	
+		//controlTowerFrame.setUndecorated(true);	
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		controlTowerFrame.setFocusable(true);
