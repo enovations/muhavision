@@ -65,7 +65,7 @@ public class VisualRenderer extends JPanel{
 		g.setFont(new Font("Arial", Font.PLAIN, 10));
 		if(fdata!=null){
 			g.drawString("Battery: "+(int)fdata.getBattery(), 250, 30);
-			g.drawString("Speed: "+(int)fdata.getVx(), 250, 30);
+			g.drawString("Speed: "+(int)fdata.getVx(), 250, 38);
 		}
 		g.drawString("Roll: "+(int)global_main.roll, 30, 30);
 		g.drawString("Pitch: "+(int)global_main.pitch, 30, 38);
@@ -98,7 +98,7 @@ public class VisualRenderer extends JPanel{
 			g.drawOval(156, 116, 8, 8);
 			g2d.rotate(Math.toRadians(roll), 160, 120);
 			g2d.drawLine(90, 120, 230, 120);
-			g2d.drawString("MUHA", 150, 80);
+			//g2d.drawString("MUHA", 150, 80);
 			g.drawLine(120, 50, 120, 190);
 			g.drawLine(200, 50, 200, 190);
 			g.drawOval(116, 116+(int)((float)(pitch)*1.3), 8, 8);
