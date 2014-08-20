@@ -120,7 +120,7 @@ public class Main {
 			}
 		});
 		
-		visual.reloadDatas(null);
+		visual.reloadDatas(null, null);
 		visual.setDataProps(controlTowerFrame);
 	}
 	

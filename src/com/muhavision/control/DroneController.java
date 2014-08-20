@@ -9,6 +9,7 @@ import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.NavDataListener;
 import com.codeminders.ardrone.util.BufferedImageVideoListener;
 import com.muhavision.cv.OpticalFlowCalculator;
+import com.muhavision.cv.QuadrantFlowSpeed;
 import com.muhavision.cv.image.VisualRenderer;
 import com.muhavision.pid.PID;
 
@@ -36,8 +37,8 @@ public class DroneController {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}*/
-					visual.reloadDatas(image);
-					//calc.getFlowData(image);
+					QuadrantFlowSpeed speed = calc.getFlowData(image);
+					visual.reloadDatas(image, speed);
 				}
 			});
 			
