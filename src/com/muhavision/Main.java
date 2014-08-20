@@ -31,6 +31,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.codeminders.ardrone.ARDrone.Animation;
 import com.muhavision.control.DroneController;
 import com.muhavision.cv.image.VisualRenderer;
 
@@ -185,10 +186,9 @@ public class Main {
 						yaw = (Integer.parseInt(mami_array[2].trim()))/5;//reduce response
 						if(Math.abs(yaw)==1)yaw=0;
 						int mamih = Integer.parseInt(mami_array[3].trim());
-						if(mamih==2) height = 5;
-						else if(mamih == -1) height = -5;
+						if(mamih==2) height = -10;
+						else if(mamih == -1) height = 10;
 						else height = 0;
-						
 						
 						reloadControls();
 					
@@ -249,6 +249,22 @@ public class Main {
                                     e1.printStackTrace();
                                 }
                             }
+                            
+                            if(Integer.parseInt(mami_array[4].trim()) == 1){
+                                   controller.getDrone().setCombinedYawMode(true);
+                            }
+                            
+                            if(Integer.parseInt(mami_array[5].trim()) == 1){
+                            	   controller.getDrone().setCombinedYawMode(false);
+                            }
+                            
+                            if(Integer.parseInt(mami_array[0].trim()) == 1){
+                         	   try {
+								controller.getDrone().playAnimation(Animation.WAVE, 5);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+                         }
                             
                         }
                     }

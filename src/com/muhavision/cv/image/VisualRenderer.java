@@ -99,10 +99,10 @@ public class VisualRenderer extends JPanel{
 			g2d.rotate(Math.toRadians(roll), 160, 120);
 			g2d.drawLine(90, 120, 230, 120);
 			//g2d.drawString("MUHA", 150, 80);
-			g.drawLine(120, 50, 120, 190);
-			g.drawLine(200, 50, 200, 190);
-			g.drawOval(116, 116+(int)((float)(pitch)*1.3), 8, 8);
-			g.drawOval(196, 116+(int)((float)(pitch)*1.3), 8, 8);
+			//g.drawLine(120, 50, 120, 190);
+			//g.drawLine(200, 50, 200, 190);
+			//g.drawOval(116, 116+(int)((float)(pitch)*1.3), 8, 8);
+			//g.drawOval(196, 116+(int)((float)(pitch)*1.3), 8, 8);
 			
 		}
 		/*	g.setColor(Color.green);
