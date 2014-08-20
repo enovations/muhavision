@@ -22,6 +22,9 @@ import java.awt.event.MouseMotionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -35,6 +38,7 @@ public class Main {
 	
 	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
 	
+	private final static int PACKETSIZE = 1024;
 	
 	public float roll, pitch, yaw;
 	
@@ -139,31 +143,23 @@ public class Main {
 			}
 		});
 		
-		Process proc = null;
 		try {
-			proc = Runtime.getRuntime().exec("python mami.py");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		
-		if(proc!=null){
-		
-		InputStreamReader ior = new InputStreamReader(proc.getInputStream());
-		final BufferedReader bur = new BufferedReader(ior);
+		final DatagramSocket socket = new DatagramSocket(1234);
 		
 		Thread mami_listener = new Thread(){
 			
 			public void run(){
 				while(true){
 					// x;y;z
-					String mami_data = "";
-					try {
-						mami_data = bur.readLine();
+					DatagramPacket packet = new DatagramPacket( new byte[PACKETSIZE], PACKETSIZE ) ;
+		            try {
+						socket.receive(packet) ;
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 					
-					String[] mami_array = mami_data.split("\\;");
+					String[] mami_array = new String(packet.getData()).split("\\;");
 					
 					if(mami_array.length>2){
 					
@@ -184,6 +180,8 @@ public class Main {
 		
 		mami_listener.start();
 		
+		} catch (SocketException e1) {
+			e1.printStackTrace();
 		}
 		
 		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
