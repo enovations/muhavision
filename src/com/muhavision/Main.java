@@ -161,14 +161,11 @@ public class Main {
 					
 					String[] mami_array = new String(packet.getData()).split("\\;");
 					
-					if(mami_array.length>2){
+					if(mami_array.length>1){
 					
-						int mami_pitch = Integer.parseInt(mami_array[1].trim());
-						int mami_roll = Integer.parseInt(mami_array[0].trim());
-						int mami_yaw = Integer.parseInt(mami_array[2].trim());
-						roll = (int)mami_roll;
-						pitch = (int)mami_pitch;
-						yaw = (int)mami_yaw;
+						pitch = Integer.parseInt(mami_array[1].trim());
+						roll = Integer.parseInt(mami_array[0].trim());
+						yaw = Integer.parseInt(mami_array[2].trim());
 					
 						reloadControls();
 					
@@ -206,13 +203,11 @@ public class Main {
 	}
 	
 	protected void reloadControls() {
-		//System.out.println(pitch+" : "+roll+" : "+yaw);
-		visual.reloadNoData();
 		try {
 			controller.getDrone().move(roll, pitch, 0, yaw);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public static void main(String[] args) {
