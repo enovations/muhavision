@@ -13,6 +13,7 @@ package com.muhavision;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,8 +34,8 @@ public class Main {
 	
 	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
 	
-	DroneController controller = new DroneController();
 	VisualRenderer visual = new VisualRenderer();
+	DroneController controller = new DroneController(visual);
 	
 	public static final boolean DEBUG = true;
 	
@@ -63,6 +64,11 @@ public class Main {
 		takeoff.setFocusable(false);
 		commands.add(takeoff);
 		
+		//main panel
+		JPanel visualHolder = new JPanel(new GridLayout());
+		visualHolder.add(visual);
+		controlTowerFrame.add("Center", visualHolder);
+		
 		JButton land = new JButton("Land");
 		land.setBackground(Color.black);
 		land.setForeground(Color.white);
@@ -82,11 +88,12 @@ public class Main {
 		
 		controlTowerFrame.add("North", commands);
 		
-		controlTowerFrame.setResizable(false);
+		//controlTowerFrame.setResizable(false);
 		//controlTowerFrame.setSize(700, 500);
-		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 		controlTowerFrame.setUndecorated(true);	
 		controlTowerFrame.setVisible(true);
+		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		controlTowerFrame.setFocusable(true);
 		controlTowerFrame.setFocusableWindowState(true);
 		controlTowerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,6 +118,8 @@ public class Main {
 				}
 			}
 		});
+		
+		visual.reloadDatas(null);
 	}
 	
 	public static void main(String[] args) {

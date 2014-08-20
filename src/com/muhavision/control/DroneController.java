@@ -8,15 +8,16 @@ import com.codeminders.ardrone.ARDrone;
 import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.NavDataListener;
 import com.codeminders.ardrone.util.BufferedImageVideoListener;
+import com.muhavision.cv.image.VisualRenderer;
 import com.muhavision.pid.PID;
 
 public class DroneController {
 	
-	PID roll = new PID(1, 1, 0, PID.Direction.NORMAL);
+	PID roll = new PID(1, 1, 0, 10, PID.Direction.NORMAL);
 	
 	ARDrone drone = null;
 	
-	public DroneController() {
+	public DroneController(final VisualRenderer visual) {
 		System.out.println("Drone controller loading...");
 		try {
 			
@@ -32,7 +33,7 @@ public class DroneController {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}*/
-					
+					visual.reloadDatas(image);
 				}
 			});
 			
