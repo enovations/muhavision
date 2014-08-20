@@ -203,6 +203,66 @@ public class Main {
 		} catch (SocketException e1) {
 			e1.printStackTrace();
 		}
+
+
+
+        try {
+
+            final DatagramSocket socket = new DatagramSocket(2345);
+
+            Thread mami_listener = new Thread(){
+
+                public void run(){
+                    while(true){
+                        // x;y;z
+                        DatagramPacket packet = new DatagramPacket( new byte[PACKETSIZE], PACKETSIZE ) ;
+                        try {
+                            socket.receive(packet) ;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        String[] mami_array = new String(packet.getData()).split("\\;");
+
+                        if(mami_array.length>1){
+
+                            if(Integer.parseInt(mami_array[2].trim()) == 1){
+                                try {
+                                    controller.getDrone().takeOff();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+
+                            if(Integer.parseInt(mami_array[3].trim()) == 1){
+                                try {
+                                    controller.getDrone().land();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+
+                            if(Integer.parseInt(mami_array[2].trim()) == 1){
+                                try {
+                                    controller.getDrone().trim();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+
+            };
+
+            mami_listener.start();
+
+        } catch (SocketException e1) {
+            e1.printStackTrace();
+        }
+
+
 		
 		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
 			@Override
