@@ -12,32 +12,42 @@ public class PID {
 	
 	float p,i,d;
 	float err;
-	long dt = -1;
+	long prevTime = -1;
 	float prevErr;
 	float integration;
 	int direction = 1;
+	int imax;
 	
-	public PID(int p, int i, int d, int direction) {
+	public PID(int p, int i, int d, int imax, int direction) {
 		this.p = p;
 		this.i = i;
 		this.d = d;
+		this.imax = imax;
 		this.direction = direction;
 	}
 	
 	public float calculate(float input, float setpoint){
 		
-		if(dt!=-1){
+		if(prevTime!=-1){
 			
-			dt = System.currentTimeMillis() - dt;
+			float dt = ((float)(System.nanoTime() - prevTime))/1000000000.0f;
+			prevTime = System.nanoTime();
 		
 			float err = setpoint - input;
 			float diff = (err - prevErr)/dt;
 			integration += err*dt;
 		
+			prevErr = err;
+			
+			if(integration>imax)
+				integration = imax;
+			if(integration<-imax)
+				integration = -imax;
+			
 			return (err*p + integration*i + diff*d)*direction;
 		
 		}else{
-			dt = System.currentTimeMillis();
+			prevTime = System.nanoTime();
 			return 0;
 		}
 
@@ -46,7 +56,7 @@ public class PID {
 	public void resetPID(){
 		prevErr = 0;
 		integration = 0;
-		dt = -1;
+		prevTime = -1;
 	}
 	
 	public static interface Direction {
