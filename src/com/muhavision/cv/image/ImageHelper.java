@@ -2,13 +2,15 @@ package com.muhavision.cv.image;
 
 import java.awt.*;
 
+import javax.swing.JFrame;
+
 /**
  * Created by ziga on 20.8.2014.
  */
 public class ImageHelper {
 
-    public static ImageData getScaledData(){
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    public static ImageData getScaledData(JFrame frame){
+        Dimension dimension = frame.getSize();
 
 
         float h = 480;

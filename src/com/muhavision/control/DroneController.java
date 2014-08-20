@@ -37,7 +37,7 @@ public class DroneController {
 						e.printStackTrace();
 					}*/
 					visual.reloadDatas(image);
-					calc.getFlowData(image);
+					//calc.getFlowData(image);
 				}
 			});
 			

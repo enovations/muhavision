@@ -2,6 +2,8 @@ package com.muhavision.cv;
 
 import java.awt.image.BufferedImage;
 
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 

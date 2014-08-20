@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,8 +17,10 @@ public class VisualRenderer extends JPanel{
 	float avgFps;
 	float filtT = 10;
 	
-	public VisualRenderer() {
-		
+	ImageData data = null;
+	
+	public VisualRenderer(JFrame frame) {
+		data = ImageHelper.getScaledData(frame);
 	}
 	
 	public void reloadDatas(BufferedImage image){
@@ -27,17 +30,15 @@ public class VisualRenderer extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g){
-		g.setColor(Color.black);
+		System.out.println(data.w+":"+data.h);
 		float diff = (((float)System.nanoTime() - prevData))/1000000000.0f;
 		prevData = System.nanoTime();
 		float fps = 1.0f/diff;
 		avgFps = (avgFps*filtT+fps)/(filtT+1);
 		if(image!=null)
-			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+			g.drawImage(image, data.x, data.y, data.w, data.h, this);
 		else
 			g.drawImage(new ImageIcon("./res/nosignal.png").getImage(), 0, 0, getWidth(), getHeight(), this);
-		//*/
-		g.setColor(Color.white);
 		g.drawString("FPS: "+(int)avgFps, 30, 30);
 	}
 
