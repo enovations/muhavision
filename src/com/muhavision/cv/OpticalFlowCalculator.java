@@ -47,8 +47,21 @@ public class OpticalFlowCalculator {
                 cvSize(win_size, win_size), cvSize(-1, -1),
                 cvTermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 20, 0.03));
         
+        //Lucas Kande filter
+        
         BytePointer features_found = new BytePointer(MAX_CORNERS);
         FloatPointer feature_errors = new FloatPointer(MAX_CORNERS);
+        
+        CvSize pyr_sz = cvSize(current.width() + 8, previous.height() / 3);
+
+        IplImage pyrA = cvCreateImage(pyr_sz, IPL_DEPTH_32F, 1);
+        IplImage pyrB = cvCreateImage(pyr_sz, IPL_DEPTH_32F, 1);
+
+        CvPoint2D32f cornersB = new CvPoint2D32f(MAX_CORNERS);
+        cvCalcOpticalFlowPyrLK(current, previous, pyrA, pyrB, cornersA, cornersB,
+                corner_count.get(), cvSize(win_size, win_size), 5,
+                features_found, feature_errors,
+                cvTermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 20, 0.3), 0);
 		
 		return new QuadrantFlowSpeed();
 	}

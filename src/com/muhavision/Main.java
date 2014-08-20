@@ -35,7 +35,7 @@ public class Main {
 	
 	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
 	
-	VisualRenderer visual = new VisualRenderer(controlTowerFrame);
+	VisualRenderer visual = new VisualRenderer();
 	DroneController controller = new DroneController(visual);
 	
 	public static final boolean DEBUG = true;
@@ -121,6 +121,7 @@ public class Main {
 		});
 		
 		visual.reloadDatas(null);
+		visual.setDataProps(controlTowerFrame);
 	}
 	
 	public static void main(String[] args) {

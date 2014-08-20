@@ -17,7 +17,7 @@ public class ImageHelper {
         float w = 640;
         float sw = dimension.width;
         float sh = dimension.height;
-
+        
         float ratio = h / w;
         float sratio = sh / sw;
 

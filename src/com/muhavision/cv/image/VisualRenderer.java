@@ -17,9 +17,13 @@ public class VisualRenderer extends JPanel{
 	float avgFps;
 	float filtT = 10;
 	
-	ImageData data = null;
+	ImageData data = new ImageData();
 	
-	public VisualRenderer(JFrame frame) {
+	public VisualRenderer() {
+		
+	}
+	
+	public void setDataProps(JFrame frame){
 		data = ImageHelper.getScaledData(frame);
 	}
 	
@@ -30,7 +34,7 @@ public class VisualRenderer extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g){
-		System.out.println(data.w+":"+data.h);
+		//System.out.println(data.w+":"+data.h);
 		float diff = (((float)System.nanoTime() - prevData))/1000000000.0f;
 		prevData = System.nanoTime();
 		float fps = 1.0f/diff;
