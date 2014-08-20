@@ -242,7 +242,7 @@ public class Main {
                                 }
                             }
 
-                            if(Integer.parseInt(mami_array[2].trim()) == 1){
+                            if(Integer.parseInt(mami_array[1].trim()) == 1){
                                 try {
                                     controller.getDrone().trim();
                                 } catch (IOException e1) {
