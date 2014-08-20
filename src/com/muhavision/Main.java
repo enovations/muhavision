@@ -11,28 +11,24 @@
 package com.muhavision;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
-import javax.swing.UIManager;
 
 import com.muhavision.control.DroneController;
-import com.muhavision.cv.image.ImageHelper;
 import com.muhavision.cv.image.VisualRenderer;
 
 public class Main {
@@ -143,14 +139,30 @@ public class Main {
 			}
 		});
 		
-		final Scanner mami_source = new Scanner(System.in);
+		/*Process proc = null;
+		try {
+			proc = Runtime.getRuntime().exec("python mami.py");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		if(proc!=null){*/
+		
+		InputStreamReader ior = new InputStreamReader(System.in);
+		final BufferedReader bur = new BufferedReader(ior);
+		//final Scanner mami_source = new Scanner(System.in);
 		
 		Thread mami_listener = new Thread(){
 			
 			public void run(){
 				while(true){
 					// x;y;z
-					String mami_data = mami_source.nextLine();
+					String mami_data = "";
+					try {
+						mami_data = bur.readLine();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					
 					String[] mami_array = mami_data.split(";");
 					
@@ -172,6 +184,8 @@ public class Main {
 		};
 		
 		mami_listener.start();
+		
+		//}
 		
 		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
 			@Override
