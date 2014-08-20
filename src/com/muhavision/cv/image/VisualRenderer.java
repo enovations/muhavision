@@ -91,16 +91,20 @@ public class VisualRenderer extends JPanel{
 			g.drawOval(140, 140, 5, 5);
 		}
 		Graphics2D g2d = (Graphics2D) g;
-		//if(fdata!=null){
-		//	int roll = (int) fdata.getRoll();
-			int roll = 0;
+		if(fdata!=null){
+			int roll = (int) fdata.getRoll();
+			int pitch = (int) fdata.getPitch();
 			g2d.setColor(Color.white);
+			g.drawOval(156, 116, 8, 8);
 			g2d.rotate(Math.toRadians(roll), 160, 120);
 			g2d.drawLine(90, 120, 230, 120);
-			g.drawLine(140, 50, 140, 190);
-			g.drawLine(180, 50, 180, 190);
+			g2d.drawString("MUHA", 150, 80);
+			g.drawLine(120, 50, 120, 190);
+			g.drawLine(200, 50, 200, 190);
+			g.drawOval(116, 116+(int)((float)(pitch)*1.3), 8, 8);
+			g.drawOval(196, 116+(int)((float)(pitch)*1.3), 8, 8);
 			
-		//}
+		}
 		/*	g.setColor(Color.green);
 			int cnt = 0;
 			for (Point p : speed.tmp2) {
