@@ -24,3 +24,7 @@ local.properties
 .settings/
 .loadpath
 MuhaVision.iml
+
+out/production/MuhaVision/META-INF/MANIFEST.MF
+
+src/META-INF/MANIFEST.MF

@@ -28,6 +28,7 @@ import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
 import com.muhavision.control.DroneController;
+import com.muhavision.control.JoysticController;
 import com.muhavision.cv.image.ImageHelper;
 import com.muhavision.cv.image.VisualRenderer;
 
