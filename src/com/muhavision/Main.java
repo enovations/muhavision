@@ -94,12 +94,29 @@ public class Main {
 		land.setFocusable(false);
 		commands.add(land);
 		
+		JButton trim = new JButton("Flat trim");
+		trim.setBackground(Color.black);
+		trim.setForeground(Color.white);
+		trim.setFont(new Font("Arial", Font.PLAIN, 17));
+		trim.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.getDrone().trim();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+		trim.setFocusable(false);
+		commands.add(trim);
+		
 		controlTowerFrame.add("North", commands);
 		
 		//controlTowerFrame.setResizable(false);
 		//controlTowerFrame.setSize(700, 500);
 		
-		//controlTowerFrame.setUndecorated(true);	
+		controlTowerFrame.setUndecorated(true);	
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		controlTowerFrame.setFocusable(true);
