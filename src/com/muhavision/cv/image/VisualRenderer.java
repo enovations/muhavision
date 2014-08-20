@@ -1,7 +1,9 @@
 package com.muhavision.cv.image;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
@@ -10,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.Point;
 import com.muhavision.Main;
 import com.muhavision.cv.QuadrantFlowSpeed;
@@ -24,6 +27,8 @@ public class VisualRenderer extends JPanel{
 	ImageData data = new ImageData();
 	QuadrantFlowSpeed speed = new QuadrantFlowSpeed();
 	
+	NavData fdata = null;
+	
 	Main global_main = null;
 	
 	public VisualRenderer(Main main) {
@@ -34,9 +39,10 @@ public class VisualRenderer extends JPanel{
 		data = ImageHelper.getScaledData(frame);
 	}
 	
-	public void reloadDatas(BufferedImage image, QuadrantFlowSpeed speed){
+	public void reloadDatas(BufferedImage image, QuadrantFlowSpeed speed, NavData fdata){
 		this.image = image;
 		this.speed = speed;
+		this.fdata = fdata;
 		repaint();
 	}
 	
@@ -56,13 +62,18 @@ public class VisualRenderer extends JPanel{
 			g.drawImage(image, 0, 0, this);
 		else
 			g.drawImage(new ImageIcon("./res/nosignal.png").getImage(), 0, 0, 320, 240, this);
-		g.drawString("FPS: "+(int)avgFps, 30, 30);
-		g.drawString("Roll: "+(int)global_main.roll, 30, 40);
-		g.drawString("Pitch: "+(int)global_main.pitch, 30, 50);
-		g.drawString("Yaw: "+(int)global_main.yaw, 30, 60);
-		g.setColor(Color.yellow);
-		g.drawLine(140, 50, 140, 190);
-		g.drawLine(180, 50, 180, 190);
+		g.setFont(new Font("Arial", Font.PLAIN, 10));
+		if(fdata!=null){
+			g.drawString("Battery: "+(int)fdata.getBattery(), 250, 30);
+			g.drawString("Speed: "+(int)fdata.getVx(), 250, 30);
+		}
+		g.drawString("Roll: "+(int)global_main.roll, 30, 30);
+		g.drawString("Pitch: "+(int)global_main.pitch, 30, 38);
+		g.drawString("Yaw: "+(int)global_main.yaw, 30, 46);
+		g.drawString("Height: "+(int)global_main.height, 30, 54);
+		//g.setColor(Color.yellow);
+		//g.drawLine(140, 50, 140, 190);
+		//g.drawLine(180, 50, 180, 190);
 		g.setColor(Color.red);
 		if(speed!=null){
 			g.drawLine(80, 80, 80+(speed.lx*2), 80);
@@ -79,6 +90,17 @@ public class VisualRenderer extends JPanel{
 			g.drawLine(141, 141, 141+((speed.rx-speed.lx)), 141);
 			g.drawOval(140, 140, 5, 5);
 		}
+		Graphics2D g2d = (Graphics2D) g;
+		//if(fdata!=null){
+		//	int roll = (int) fdata.getRoll();
+			int roll = 0;
+			g2d.setColor(Color.white);
+			g2d.rotate(Math.toRadians(roll), 160, 120);
+			g2d.drawLine(90, 120, 230, 120);
+			g.drawLine(140, 50, 140, 190);
+			g.drawLine(180, 50, 180, 190);
+			
+		//}
 		/*	g.setColor(Color.green);
 			int cnt = 0;
 			for (Point p : speed.tmp2) {

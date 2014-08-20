@@ -20,6 +20,7 @@ public class DroneController {
 	OpticalFlowCalculator calc = new OpticalFlowCalculator();
 	
 	ARDrone drone = null;
+	NavData data = null;
 	
 	public DroneController(final VisualRenderer visual) {
 		System.out.println("Drone controller loading...");
@@ -39,15 +40,15 @@ public class DroneController {
 					}*/
 					//System.out.println("aae");
 					QuadrantFlowSpeed speed = calc.getFlowData(image);
-					visual.reloadDatas(image, speed);
+					visual.reloadDatas(image, speed, data);
 				}
 			});
 			
 			drone.addNavDataListener(new NavDataListener() {
 				
 				@Override
-				public void navDataReceived(NavData data) {
-					
+				public void navDataReceived(NavData fdata) {
+					data = fdata;
 				}
 			});
 			

@@ -40,7 +40,7 @@ public class Main {
 	
 	private final static int PACKETSIZE = 1024;
 	
-	public float roll, pitch, yaw;
+	public float roll, pitch, yaw, height;
 	
 	VisualRenderer visual = new VisualRenderer(this);
 	DroneController controller = new DroneController(visual);
@@ -116,7 +116,7 @@ public class Main {
 		//controlTowerFrame.setResizable(false);
 		//controlTowerFrame.setSize(700, 500);
 		
-		controlTowerFrame.setUndecorated(true);	
+		//controlTowerFrame.setUndecorated(true);	
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		controlTowerFrame.setFocusable(true);
@@ -182,8 +182,14 @@ public class Main {
 					
 						pitch = Integer.parseInt(mami_array[1].trim());
 						roll = Integer.parseInt(mami_array[0].trim());
-						yaw = Integer.parseInt(mami_array[2].trim());
-					
+						yaw = (Integer.parseInt(mami_array[2].trim()))/5;//reduce response
+						if(Math.abs(yaw)==1)yaw=0;
+						int mamih = Integer.parseInt(mami_array[3].trim());
+						if(mamih==2) height = 5;
+						else if(mamih == -1) height = -5;
+						else height = 0;
+						
+						
 						reloadControls();
 					
 					}
@@ -215,7 +221,7 @@ public class Main {
 			@Override public void mouseDragged(MouseEvent arg0) {}
 		});
 		
-		visual.reloadDatas(null, null);
+		visual.reloadDatas(null, null, null);
 		visual.setDataProps(controlTowerFrame);
 	}
 	
