@@ -23,6 +23,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,12 +39,13 @@ public class Main {
 	
 	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
 	
-	VisualRenderer visual = new VisualRenderer();
+	
+	public float roll, pitch, yaw;
+	
+	VisualRenderer visual = new VisualRenderer(this);
 	DroneController controller = new DroneController(visual);
 	
 	public static final boolean DEBUG = true;
-	
-	int roll, pitch, yaw;
 	
 	public Main() {
 		
@@ -131,28 +133,53 @@ public class Main {
 					}
 				}
 				
-				if(arg0.getKeyChar()=='w') pitch = 10;
-				if(arg0.getKeyChar()=='s') pitch = -10;
-				if(arg0.getKeyChar()=='a') roll = 10;
-				if(arg0.getKeyChar()=='d') roll = -10;
+				if(arg0.getKeyChar()=='w') pitch = -10;
+				if(arg0.getKeyChar()=='s') pitch = 10;
+				if(arg0.getKeyChar()=='a') roll = -10;
+				if(arg0.getKeyChar()=='d') roll = 10;
 				
 				reloadControls();
 				
 			}
 		});
 		
+		final Scanner mami_source = new Scanner(System.in);
+		
+		Thread mami_listener = new Thread(){
+			
+			public void run(){
+				while(true){
+					// x;y;z
+					String mami_data = mami_source.nextLine();
+					
+					String[] mami_array = mami_data.split(";");
+					float mami_pitch = Float.parseFloat(mami_array[1].trim());
+					float mami_roll = Float.parseFloat(mami_array[0].trim());
+					float mami_yaw = Float.parseFloat(mami_array[2].trim());
+					roll = (int)mami_roll;
+					pitch = (int)mami_pitch;
+					yaw = (int)mami_yaw;
+					
+					reloadControls();
+				}
+			}
+			
+		};
+		
+		mami_listener.start();
+		
 		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
-				int x = arg0.getX();
+				/*int x = arg0.getX();
 				int w = (int) controlTowerFrame.getSize().getWidth();
 				int relative = (w/2) - x;
 				if(Math.abs(relative)>50)
-					yaw = (relative - 50)/30;
+					yaw = ((relative - 50)/30)*-1;
 				else
 					yaw = 0;
 				
-				reloadControls();
+				reloadControls();*/
 			}
 			
 			@Override public void mouseDragged(MouseEvent arg0) {}
@@ -164,6 +191,7 @@ public class Main {
 	
 	protected void reloadControls() {
 		//System.out.println(pitch+" : "+roll+" : "+yaw);
+		visual.reloadNoData();
 		try {
 			controller.getDrone().move(roll, pitch, 0, yaw);
 		} catch (IOException e) {

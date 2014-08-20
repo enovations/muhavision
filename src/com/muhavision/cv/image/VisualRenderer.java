@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.codeminders.ardrone.Point;
+import com.muhavision.Main;
 import com.muhavision.cv.QuadrantFlowSpeed;
 
 public class VisualRenderer extends JPanel{
@@ -23,8 +24,10 @@ public class VisualRenderer extends JPanel{
 	ImageData data = new ImageData();
 	QuadrantFlowSpeed speed = new QuadrantFlowSpeed();
 	
-	public VisualRenderer() {
-		
+	Main global_main = null;
+	
+	public VisualRenderer(Main main) {
+		this.global_main = main;
 	}
 	
 	public void setDataProps(JFrame frame){
@@ -34,6 +37,10 @@ public class VisualRenderer extends JPanel{
 	public void reloadDatas(BufferedImage image, QuadrantFlowSpeed speed){
 		this.image = image;
 		this.speed = speed;
+		repaint();
+	}
+	
+	public void reloadNoData(){
 		repaint();
 	}
 	
@@ -50,6 +57,9 @@ public class VisualRenderer extends JPanel{
 		else
 			g.drawImage(new ImageIcon("./res/nosignal.png").getImage(), 0, 0, 320, 240, this);
 		g.drawString("FPS: "+(int)avgFps, 30, 30);
+		g.drawString("Roll: "+(int)global_main.roll, 30, 40);
+		g.drawString("Pitch: "+(int)global_main.pitch, 30, 50);
+		g.drawString("Yaw: "+(int)global_main.yaw, 30, 60);
 		g.setColor(Color.yellow);
 		g.drawLine(140, 50, 140, 190);
 		g.drawLine(180, 50, 180, 190);
