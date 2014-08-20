@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 public class VisualRenderer extends JPanel{
 	
 	public BufferedImage image = null;
+	long prevData = 0;
+	float avgFps;
+	float filtT = 10;
 	
 	public VisualRenderer() {
 		
@@ -25,10 +28,17 @@ public class VisualRenderer extends JPanel{
 	@Override
 	public void paintComponent(Graphics g){
 		g.setColor(Color.black);
+		float diff = (((float)System.nanoTime() - prevData))/1000000000.0f;
+		prevData = System.nanoTime();
+		float fps = 1.0f/diff;
+		avgFps = (avgFps*filtT+fps)/(filtT+1);
 		if(image!=null)
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 		else
 			g.drawImage(new ImageIcon("./res/nosignal.png").getImage(), 0, 0, getWidth(), getHeight(), this);
+		//*/
+		g.setColor(Color.white);
+		g.drawString("FPS: "+(int)avgFps, 30, 30);
 	}
 
 }
