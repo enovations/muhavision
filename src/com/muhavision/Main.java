@@ -10,6 +10,7 @@
 
 package com.muhavision;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -26,14 +27,16 @@ import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
 import com.muhavision.control.DroneController;
+import com.muhavision.cv.image.VisualBuffer;
 
 public class Main {
 	
 	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
 	
 	DroneController controller = new DroneController();
+	VisualBuffer visual = new VisualBuffer();
 	
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	
 	public Main() {
 		
@@ -41,8 +44,10 @@ public class Main {
 		
 		JPanel commands = new JPanel();
 		
+		commands.setBackground(Color.black);
+		
 		JButton takeoff = new JButton("Take off");
-		takeoff.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		takeoff.setFont(new Font("Arial", Font.PLAIN, 17));
 		takeoff.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -57,7 +62,7 @@ public class Main {
 		commands.add(takeoff);
 		
 		JButton land = new JButton("Land");
-		land.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+		land.setFont(new Font("Arial", Font.PLAIN, 17));
 		land.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -74,13 +79,16 @@ public class Main {
 		controlTowerFrame.add("North", commands);
 		
 		controlTowerFrame.setResizable(false);
-		controlTowerFrame.setSize(700, 500);
+		//controlTowerFrame.setSize(700, 500);
+		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		controlTowerFrame.setUndecorated(true);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		controlTowerFrame.setLocation(dim.width/2-controlTowerFrame.getSize().width/2, 
 					dim.height/2-controlTowerFrame.getSize().height/2);		
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setFocusable(true);
 		controlTowerFrame.setFocusableWindowState(true);
+		controlTowerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		controlTowerFrame.addKeyListener(new KeyListener() {	
 			@Override public void keyTyped(KeyEvent arg0) {}
 			@Override public void keyReleased(KeyEvent arg0) {}
@@ -92,6 +100,14 @@ public class Main {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){ 
+					controlTowerFrame.setVisible(false);
+					try {
+						controller.getDrone().sendEmergencySignal();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 	}

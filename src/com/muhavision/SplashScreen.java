@@ -30,6 +30,7 @@ public class SplashScreen extends JFrame{
 		setLocation(dim.width/2-getSize().width/2, 
 					dim.height/2-getSize().height/2);	
 		add(new JLabel(new ImageIcon("./res/logo.png")));
+		setVisible(false);
 	}
 	
 	public static void main(String[] args) {

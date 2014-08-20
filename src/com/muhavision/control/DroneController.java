@@ -27,11 +27,12 @@ public class DroneController {
 				
 				@Override
 				public void imageReceived(BufferedImage image) {
-					try {
+					/*try {
 						drone.sendAllNavigationData();
 					} catch (IOException e) {
 						e.printStackTrace();
-					}
+					}*/
+					
 				}
 			});
 			
