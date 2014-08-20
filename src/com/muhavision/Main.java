@@ -28,6 +28,7 @@ import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
 import com.muhavision.control.DroneController;
+import com.muhavision.cv.image.ImageHelper;
 import com.muhavision.cv.image.VisualRenderer;
 
 public class Main {
@@ -74,15 +75,15 @@ public class Main {
 		land.setForeground(Color.white);
 		land.setFont(new Font("Arial", Font.PLAIN, 17));
 		land.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					controller.getDrone().land();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.getDrone().land();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 		land.setFocusable(false);
 		commands.add(land);
 		
@@ -124,6 +125,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		new Main();
+
 	}
 
 }
