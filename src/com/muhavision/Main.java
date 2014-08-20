@@ -140,15 +140,15 @@ public class Main {
 		});
 		
 		Process proc = null;
-		/*try {
+		try {
 			proc = Runtime.getRuntime().exec("python mami.py");
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}//*/
+		}
 		
-		if(proc==null){
+		if(proc!=null){
 		
-		InputStreamReader ior = new InputStreamReader(System.in);
+		InputStreamReader ior = new InputStreamReader(proc.getInputStream());
 		final BufferedReader bur = new BufferedReader(ior);
 		
 		Thread mami_listener = new Thread(){
