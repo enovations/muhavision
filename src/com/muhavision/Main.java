@@ -139,18 +139,17 @@ public class Main {
 			}
 		});
 		
-		/*Process proc = null;
-		try {
+		Process proc = null;
+		/*try {
 			proc = Runtime.getRuntime().exec("python mami.py");
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}
+		}//*/
 		
-		if(proc!=null){*/
+		if(proc==null){
 		
 		InputStreamReader ior = new InputStreamReader(System.in);
 		final BufferedReader bur = new BufferedReader(ior);
-		//final Scanner mami_source = new Scanner(System.in);
 		
 		Thread mami_listener = new Thread(){
 			
@@ -164,13 +163,13 @@ public class Main {
 						e.printStackTrace();
 					}
 					
-					String[] mami_array = mami_data.split(";");
+					String[] mami_array = mami_data.split("\\;");
 					
 					if(mami_array.length>2){
 					
-						float mami_pitch = Float.parseFloat(mami_array[1].trim());
-						float mami_roll = Float.parseFloat(mami_array[0].trim());
-						float mami_yaw = Float.parseFloat(mami_array[2].trim());
+						int mami_pitch = Integer.parseInt(mami_array[1].trim());
+						int mami_roll = Integer.parseInt(mami_array[0].trim());
+						int mami_yaw = Integer.parseInt(mami_array[2].trim());
 						roll = (int)mami_roll;
 						pitch = (int)mami_pitch;
 						yaw = (int)mami_yaw;
@@ -185,7 +184,7 @@ public class Main {
 		
 		mami_listener.start();
 		
-		//}
+		}
 		
 		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
 			@Override
