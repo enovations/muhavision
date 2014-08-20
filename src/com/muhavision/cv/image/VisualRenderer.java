@@ -75,7 +75,7 @@ public class VisualRenderer extends JPanel{
 		//g.drawLine(140, 50, 140, 190);
 		//g.drawLine(180, 50, 180, 190);
 		g.setColor(Color.red);
-		if(speed!=null){
+		/*if(speed!=null){
 			g.drawLine(80, 80, 80+(speed.lx*2), 80);
 			g.drawLine(80, 81, 80+(speed.lx*2), 81);
 			g.drawOval(80, 80, 5, 5);
@@ -89,7 +89,7 @@ public class VisualRenderer extends JPanel{
 			g.drawLine(140, 140, 140+((speed.rx-speed.lx)), 140);
 			g.drawLine(141, 141, 141+((speed.rx-speed.lx)), 141);
 			g.drawOval(140, 140, 5, 5);
-		}
+		}*/
 		Graphics2D g2d = (Graphics2D) g;
 		if(fdata!=null){
 			int roll = (int) fdata.getRoll();

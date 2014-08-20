@@ -39,8 +39,8 @@ public class DroneController {
 						e.printStackTrace();
 					}*/
 					//System.out.println("aae");
-					QuadrantFlowSpeed speed = calc.getFlowData(image);
-					visual.reloadDatas(image, speed, data);
+					//QuadrantFlowSpeed speed = calc.getFlowData(image);
+					visual.reloadDatas(image, null, data);
 				}
 			});
 			
