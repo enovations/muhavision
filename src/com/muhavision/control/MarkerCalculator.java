@@ -18,6 +18,7 @@ public class MarkerCalculator {
 		int dy = Math.abs(y1-y2);
 		
 		if(dy!=0){
+			
 			int angle = (int)Math.toDegrees(Math.atan(dx/dy)) - 90;
 			
 			if(Math.abs(angle)<10){
@@ -30,6 +31,8 @@ public class MarkerCalculator {
 				main.yaw = out;
 				
 			}
+			
+			main.reloadControls();
 		
 		}
 	}
