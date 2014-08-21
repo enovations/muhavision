@@ -30,6 +30,7 @@ public class DroneController {
 
 	public DroneController(final VisualRenderer visual) {
 		System.out.println("Drone controller loading...");
+		MarkerTracker.load();
 		try {
 
 			drone = new ARDrone();
@@ -39,7 +40,7 @@ public class DroneController {
 
 				@Override
 				public void imageReceived(BufferedImage image) {
-					RescaleOp rescaleOp = new RescaleOp(1.8f, -20, null);
+					RescaleOp rescaleOp = new RescaleOp(1.4f, 50, null);
 					rescaleOp.filter(image, image);
 					quadImage = image;
 				}

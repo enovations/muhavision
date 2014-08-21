@@ -10,7 +10,7 @@ public class MarkerCalculator {
 		int y1 = angles.picY;
 		int y2 = angles.picY2;
 		
-		
+		//int pixelDist
 	}
 
 }
