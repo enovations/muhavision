@@ -37,12 +37,8 @@ public class OpticalFlowCalculator {
 
 		IplImage srcimg = AbstractIplImage.create(iploriginal.width(),
 				iploriginal.height(), IPL_DEPTH_8U, 1);
-		// IplImage destimg = IplImage.create(iploriginal.width(),
-		// iploriginal.height(), IPL_DEPTH_8U, 1);
 
 		cvCvtColor(iploriginal, srcimg, CV_BGR2GRAY);
-
-		// cvEqualizeHist( srcimg, destimg );
 
 		BufferedImage eqimg = srcimg.getBufferedImage();
 

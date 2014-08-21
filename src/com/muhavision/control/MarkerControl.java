@@ -11,21 +11,22 @@ public class MarkerControl {
 	public static EulerAngles getControlDataAndPictureDataBasedOnNavData(
 			NavData nav) {
 
-		if (nav.isVisionEnabled()) {
-			List<VisionTag> tags = nav.getVisionTags();
-			if (!tags.isEmpty()) {
-				VisionTag tag = tags.get(0);
-				if (tag != null) {
-					EulerAngles angles = new EulerAngles();
-					Point point = tag.getPosition();
-					angles.picX = point.getX();
-					angles.picY = point.getY();
-					angles.dist = tag.getDistance();
-					angles.hasAngles = true;
-					return angles;
+		if(nav!=null)
+			if (nav.isVisionEnabled()) {
+				List<VisionTag> tags = nav.getVisionTags();
+				if (!tags.isEmpty()) {
+					VisionTag tag = tags.get(0);
+					if (tag != null) {
+						EulerAngles angles = new EulerAngles();
+						Point point = tag.getPosition();
+						angles.picX = point.getX();
+						angles.picY = point.getY();
+						angles.dist = tag.getDistance();
+						angles.hasAngles = true;
+						return angles;
+					}
 				}
 			}
-		}
 
 		return new EulerAngles();
 	}

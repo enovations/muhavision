@@ -35,7 +35,6 @@ public class FlightMode {
 
 	public void setMode(eMode mode) {
 		this.mode = mode;
-		mode.toString();
 	}
 
 }

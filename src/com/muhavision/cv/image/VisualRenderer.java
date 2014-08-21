@@ -57,7 +57,7 @@ public class VisualRenderer extends JPanel {
 			g.drawString("Mark. dist.: " + angles.dist, 250, 38);
 			g.fillRect(angles.picX, angles.picY, 4, 4);
 		}
-
+		
 		g.drawString("Roll: " + (int) global_main.roll, 30, 30);
 		g.drawString("Pitch: " + (int) global_main.pitch, 30, 38);
 		g.drawString("Yaw: " + (int) global_main.yaw, 30, 46);
