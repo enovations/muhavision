@@ -117,7 +117,7 @@ public class Main {
 		trim.setFocusable(false);
 		commands.add(trim);
 
-		controlTowerFrame.add("North", commands);
+		//controlTowerFrame.add("North", commands);
 
 		// controlTowerFrame.setResizable(false);
 		// controlTowerFrame.setSize(700, 500);
@@ -193,9 +193,13 @@ public class Main {
 									.parseInt(mami_array[1].trim())));
 							roll = (float) (ExpoController.getExpo(Integer
 									.parseInt(mami_array[0].trim())));
-							yaw = (float) (ExpoController.getExpo((Integer
+							
+							if (visual.global_main.flightMode.getMode() != FlightMode.eMode.TAG_MODE)
+								yaw = (float) (ExpoController.getExpo((Integer
 									.parseInt(mami_array[2].trim()))) / 4.7);// reduce
 																				// response
+							
+							
 							int mamih = Integer.parseInt(mami_array[3].trim());
 							if (mamih == 2)
 								height = -0.2f;
