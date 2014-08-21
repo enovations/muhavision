@@ -117,7 +117,7 @@ public class Main {
 		trim.setFocusable(false);
 		commands.add(trim);
 
-		//controlTowerFrame.add("North", commands);
+		controlTowerFrame.add("North", commands);
 
 		// controlTowerFrame.setResizable(false);
 		// controlTowerFrame.setSize(700, 500);
@@ -130,37 +130,6 @@ public class Main {
 		// controlTowerFrame.setFocusable(true);
 		// controlTowerFrame.setFocusableWindowState(true);
 		controlTowerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*
-		 * controlTowerFrame.addKeyListener(new KeyListener() {
-		 * 
-		 * @Override public void keyTyped(KeyEvent arg0) {}
-		 * 
-		 * @Override public void keyReleased(KeyEvent arg0) {
-		 * 
-		 * //Let's listen for some keys!!! if(arg0.getKeyChar()=='w') pitch = 0;
-		 * if(arg0.getKeyChar()=='s') pitch = 0; if(arg0.getKeyChar()=='a') roll
-		 * = 0; if(arg0.getKeyChar()=='d') roll = 0;
-		 * 
-		 * reloadControls(); }
-		 * 
-		 * //Let's listen for some more keys!!!
-		 * 
-		 * @Override public void keyPressed(KeyEvent arg0) {
-		 * if(arg0.getKeyChar()=='\n') try {
-		 * controller.getDrone().sendEmergencySignal(); } catch (IOException e)
-		 * { e.printStackTrace(); } if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){
-		 * controlTowerFrame.setVisible(false); try {
-		 * controller.getDrone().sendEmergencySignal(); } catch (IOException e)
-		 * { e.printStackTrace(); } }
-		 * 
-		 * if(arg0.getKeyChar()=='w') pitch = -10; if(arg0.getKeyChar()=='s')
-		 * pitch = 10; if(arg0.getKeyChar()=='a') roll = -10;
-		 * if(arg0.getKeyChar()=='d') roll = 10;
-		 * 
-		 * reloadControls();
-		 * 
-		 * } });
-		 */
 
 		// Now lets listen for mami!!!
 		try {
