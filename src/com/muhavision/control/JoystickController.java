@@ -5,8 +5,8 @@ package com.muhavision.control;
  */
 public class JoystickController {
 
-    public static void readUSB() {
-        
-    }
+	public static void readUSB() {
+
+	}
 
 }

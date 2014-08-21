@@ -5,42 +5,37 @@ package com.muhavision.control;
  */
 public class FlightMode {
 
-    public enum eMode {
+	public enum eMode {
 
-        NORMAL_MODE(0),
-        MUHA_MODE(1),
-        TAG_MODE(2);
+		NORMAL_MODE(0), MUHA_MODE(1), TAG_MODE(2);
 
-        int mode = 0;
+		int mode = 0;
 
-        eMode(int mode){
-            this.mode = mode;
-        }
+		eMode(int mode) {
+			this.mode = mode;
+		}
 
-    }
-    
-    public static String getFlightModeName(eMode mode){
-    	if(mode == eMode.NORMAL_MODE)
-    		return "NORMAL";
-    	if(mode == eMode.MUHA_MODE)
-    		return "MUHA";
-    	if(mode == eMode.TAG_MODE)
-    		return "TAG";
-    	return "UNKNOWN";
-    }
+	}
 
-    private eMode mode = eMode.NORMAL_MODE;
+	public static String getFlightModeName(eMode mode) {
+		if (mode == eMode.NORMAL_MODE)
+			return "NORMAL";
+		if (mode == eMode.MUHA_MODE)
+			return "MUHA";
+		if (mode == eMode.TAG_MODE)
+			return "TAG";
+		return "UNKNOWN";
+	}
 
-    public eMode getMode(){
-        return mode;
-    }
+	private eMode mode = eMode.NORMAL_MODE;
 
-    public void setMode(eMode mode){
-        this.mode = mode;
-        mode.toString();
-    }
+	public eMode getMode() {
+		return mode;
+	}
 
-
-
+	public void setMode(eMode mode) {
+		this.mode = mode;
+		mode.toString();
+	}
 
 }
