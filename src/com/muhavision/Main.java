@@ -305,8 +305,7 @@ public class Main {
         } catch (SocketException e1) {
             e1.printStackTrace();
         }
-
-
+                
         //Let's listen for some mouse!!!
 		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
 			@Override
