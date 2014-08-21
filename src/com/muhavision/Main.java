@@ -117,7 +117,7 @@ public class Main {
 		trim.setFocusable(false);
 		commands.add(trim);
 
-		controlTowerFrame.add("North", commands);
+		//controlTowerFrame.add("North", commands);
 
 		// controlTowerFrame.setResizable(false);
 		// controlTowerFrame.setSize(700, 500);

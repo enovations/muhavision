@@ -5,7 +5,7 @@ import com.muhavision.pid.PID;
 
 public class MarkerCalculator {
 	
-	static PID yaw = new PID(1, 0, 0, 0, PID.Direction.NORMAL);
+	static PID yaw = new PID(0.5f, 0, 0, 0, PID.Direction.NORMAL);
 	
 	public static void calculateAndControl(EulerAngles angles, Main main){
 		
