@@ -35,10 +35,12 @@ public class DroneController {
 				public void imageReceived(BufferedImage image) {
 					QuadrantFlowSpeed speed = null;
 					EulerAngles angle = null;
+					
 					if(visual.global_main.flightMode.getMode()==FlightMode.eMode.MUHA_MODE)
 						speed = calc.getFlowData(image);
-					if(visual.global_main.flightMode.getMode()==FlightMode.eMode.TAG_MODE)
+					else if(visual.global_main.flightMode.getMode()==FlightMode.eMode.TAG_MODE)
 						angle = MarkerControl.getControlDataAndPictureDataBasedOnNavData(data);
+					
 					visual.reloadDatas(image, speed, data, angle);
 				}
 			});

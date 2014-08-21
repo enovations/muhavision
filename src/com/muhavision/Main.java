@@ -128,10 +128,10 @@ public class Main {
         //Now graphics may be visible.
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		controlTowerFrame.setFocusable(true);
-		controlTowerFrame.setFocusableWindowState(true);
+		//controlTowerFrame.setFocusable(true);
+		//controlTowerFrame.setFocusableWindowState(true);
 		controlTowerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		controlTowerFrame.addKeyListener(new KeyListener() {	
+		/*controlTowerFrame.addKeyListener(new KeyListener() {	
 			@Override public void keyTyped(KeyEvent arg0) {}
 			@Override public void keyReleased(KeyEvent arg0) {
 
@@ -170,7 +170,7 @@ public class Main {
 				reloadControls();
 				
 			}
-		});
+		});*/
 
         //Now lets listen for mami!!!
 		try {
@@ -185,6 +185,7 @@ public class Main {
                 while(true){
 					// x;y;z
 					DatagramPacket packet = new DatagramPacket( new byte[PACKETSIZE], PACKETSIZE ) ;
+					
 		            try {
 						socket.receive(packet) ;
 					} catch (IOException e) {
@@ -197,10 +198,10 @@ public class Main {
 					
 						pitch = (float)(ExpoController.getExpo(Integer.parseInt(mami_array[1].trim())));
 						roll  = (float)(ExpoController.getExpo(Integer.parseInt(mami_array[0].trim())));
-						yaw   = (float)(ExpoController.getExpo((Integer.parseInt(mami_array[2].trim())))/5.1);//reduce response
+						yaw   = (float)(ExpoController.getExpo((Integer.parseInt(mami_array[2].trim())))/4.7);//reduce response
 						int mamih = Integer.parseInt(mami_array[3].trim());
-						if(mamih==2) height = -15;
-						else if(mamih == -1) height = 15;
+						if(mamih==2) height = -3;
+						else if(mamih == -1) height = 3;
 						else height = 0;
 						
 						reloadControls();
@@ -303,27 +304,6 @@ public class Main {
         } catch (SocketException e1) {
             e1.printStackTrace();
         }
-                
-        //Let's listen for some mouse!!!
-		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
-			@Override
-			public void mouseMoved(MouseEvent arg0) {
-
-				//We don't do anything with mouse because we have MAMI!!!
-
-				/*int x = arg0.getX();
-				int w = (int) controlTowerFrame.getSize().getWidth();
-				int relative = (w/2) - x;
-				if(Math.abs(relative)>50)
-					yaw = ((relative - 50)/30)*-1;
-				else
-					yaw = 0;
-				
-				reloadControls();*/
-			}
-			
-			@Override public void mouseDragged(MouseEvent arg0) {}
-		});
 		
 		visual.reloadDatas(null, null, null, null);
 		visual.setDataProps(controlTowerFrame);
