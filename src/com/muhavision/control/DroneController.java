@@ -69,7 +69,8 @@ public class DroneController {
 						millis = System.currentTimeMillis() - millis;
 						
 						try {
-							Thread.sleep(70-millis);
+							if(millis<70)
+								Thread.sleep(70-millis);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
