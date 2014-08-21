@@ -256,6 +256,18 @@ public class Main {
                                 }
                             }
 
+                            if(Integer.parseInt(mami_array[10].trim()) == 1){
+                                flightMode.setMode(FlightMode.eMode.NORMAL_MODE);
+                            }
+
+                            if(Integer.parseInt(mami_array[8].trim()) == 1){
+                                flightMode.setMode(FlightMode.eMode.MUHA_MODE);
+                            }
+
+                            if(Integer.parseInt(mami_array[6].trim()) == 1){
+                                flightMode.setMode(FlightMode.eMode.TAG_MODE);
+                            }
+
                             if(Integer.parseInt(mami_array[1].trim()) == 1){
                                 try {
                                     controller.getDrone().trim();
@@ -279,17 +291,7 @@ public class Main {
 								e.printStackTrace();
 							}
 
-                            if(Integer.parseInt(mami_array[10].trim()) == 1){
-                                flightMode.setMode(FlightMode.eMode.NORMAL_MODE);
-                            }
 
-                            if(Integer.parseInt(mami_array[8].trim()) == 1){
-                                flightMode.setMode(FlightMode.eMode.MUHA_MODE);
-                            }
-
-                            if(Integer.parseInt(mami_array[6].trim()) == 1){
-                                flightMode.setMode(FlightMode.eMode.TAG_MODE);
-                            }
 
 
                          }
