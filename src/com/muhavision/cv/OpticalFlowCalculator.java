@@ -34,19 +34,6 @@ public class OpticalFlowCalculator {
 
 	private static final int MAX_CORNERS = 190;
 
-	public BufferedImage Equalize(BufferedImage bufferedimg) {
-		IplImage iploriginal = AbstractIplImage.createFrom(bufferedimg);
-
-		IplImage srcimg = AbstractIplImage.create(iploriginal.width(),
-				iploriginal.height(), IPL_DEPTH_8U, 1);
-
-		cvCvtColor(iploriginal, srcimg, CV_BGR2GRAY);
-
-		BufferedImage eqimg = srcimg.getBufferedImage();
-
-		return eqimg;
-	}
-
 	public QuadrantFlowSpeed getFlowData(BufferedImage curr) {
 
 		// first time

@@ -7,6 +7,7 @@ public class EulerAngles {
 	public float roll, pitch, yaw;
 
 	public int picX, picY;
+	public int picX2, picY2;
 
 	public int dist;
 

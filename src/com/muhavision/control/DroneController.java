@@ -1,6 +1,7 @@
 package com.muhavision.control;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -8,6 +9,7 @@ import com.codeminders.ardrone.ARDrone;
 import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.NavDataListener;
 import com.codeminders.ardrone.util.BufferedImageVideoListener;
+import com.muhavision.cv.MarkerTracker;
 import com.muhavision.cv.OpticalFlowCalculator;
 import com.muhavision.cv.QuadrantFlowSpeed;
 import com.muhavision.cv.image.VisualRenderer;
@@ -37,6 +39,8 @@ public class DroneController {
 
 				@Override
 				public void imageReceived(BufferedImage image) {
+					RescaleOp rescaleOp = new RescaleOp(1.8f, -20, null);
+					rescaleOp.filter(image, image);
 					quadImage = image;
 				}
 			});
@@ -63,8 +67,7 @@ public class DroneController {
 							if (visual.global_main.flightMode.getMode() == FlightMode.eMode.MUHA_MODE)
 								speed = calc.getFlowData(quadImage);
 							else if (visual.global_main.flightMode.getMode() == FlightMode.eMode.TAG_MODE)
-								angle = MarkerControl
-									.getControlDataAndPictureDataBasedOnNavData(data);
+								angle = MarkerTracker.getMarkerData(quadImage);
 
 						visual.reloadDatas(quadImage, speed, data, angle);
 						

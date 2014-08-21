@@ -309,6 +309,8 @@ public class Main {
 		}
 
 		visual.reloadDatas(null, null, null, null);
+		
+		flightMode.setMode(FlightMode.eMode.TAG_MODE);
 
 	}
 

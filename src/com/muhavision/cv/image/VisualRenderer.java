@@ -57,7 +57,7 @@ public class VisualRenderer extends JPanel {
 			g.drawString("Battery: " + fdata.getBattery(), 250, 30);
 		}
 		if (angles != null) {
-			g.drawString("Mark. dist.: " + angles.dist, 250, 38);
+			//g.drawString("Mark. dist.: " + angles.dist, 250, 38);
 			g.fillRect(angles.picX, angles.picY, 4, 4);
 		}
 		
@@ -69,7 +69,9 @@ public class VisualRenderer extends JPanel {
 		g.drawOval(156, 116, 5, 5);
 
 		if (speed != null) {
-			g.drawLine(156, 116, 156 + (speed.rx - speed.lx), 116);
+			g.drawLine(158, 117, 158 + (speed.rx - speed.lx), 117);
+			g.drawLine(158, 118, 158 + (speed.rx - speed.lx), 118);
+			g.drawLine(158, 119, 158 + (speed.rx - speed.lx), 119);
 		}
 
 		if (global_main != null) {
