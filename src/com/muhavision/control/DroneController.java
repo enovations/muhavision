@@ -33,12 +33,6 @@ public class DroneController {
 				
 				@Override
 				public void imageReceived(BufferedImage image) {
-					/*try {
-						drone.sendAllNavigationData();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}*/
-					//System.out.println("aae");
 					QuadrantFlowSpeed speed = calc.getFlowData(image);
 					visual.reloadDatas(image, speed, data);
 				}
