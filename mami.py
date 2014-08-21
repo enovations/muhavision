@@ -21,7 +21,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 while 1:
 	for e in pygame.event.get(): # iterate over event stack
 		if e.type == pygame.locals.JOYAXISMOTION: # 7
-			x, y, z, a = (j.get_axis(0)+0.01)*20, (j.get_axis(1)+0.01)*20, (j.get_axis(2)+0.01)*20, (j.get_axis(3)+0.1)*2
+			x, y, z, a = (j.get_axis(0)+0.01)*100, (j.get_axis(1)+0.01)*100, (j.get_axis(2)+0.01)*100, (j.get_axis(3)+0.1)*2
 			MESSAGE = str(int(x)) + ';' + str(int(y)) + ';' + str(int(z)) + ';' + str(int(a)) + '\n\r'
 			sock.sendto(MESSAGE, (UDP_IP, UDP_PORT1))
 		if e.type == pygame.locals.JOYBUTTONDOWN: # 10
