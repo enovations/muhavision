@@ -1,3 +1,4 @@
+#Python... The worst thing ever. Never again.
 import pygame
 from pygame import locals
 import socket
@@ -44,3 +45,4 @@ while 1:
 		delta = delta + difference
 		if updates == 20:
 			updates = 0
+#I'm still having nightmares because of this.

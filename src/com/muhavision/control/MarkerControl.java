@@ -6,6 +6,8 @@ import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.Point;
 import com.codeminders.ardrone.VisionTag;
 
+//A class that should follow the marker but it doesn't.
+
 public class MarkerControl {
 
 	public static EulerAngles getControlDataAndPictureDataBasedOnNavData(

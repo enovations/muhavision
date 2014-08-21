@@ -3,6 +3,11 @@ package com.muhavision.control;
 /**
  * Created by ziga on 21.8.2014.
  */
+
+//^ Selfish boy.
+
+//Class that determines the mode of quad copter flight control
+
 public class FlightMode {
 
 	public enum eMode {

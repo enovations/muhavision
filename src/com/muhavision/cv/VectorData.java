@@ -1,5 +1,7 @@
 package com.muhavision.cv;
 
+//Because Java doesn't provide a f*****g struct
+
 public class VectorData {
 
 	public int x1, x2, y1, y2;

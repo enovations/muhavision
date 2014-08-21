@@ -312,6 +312,7 @@ public class Main {
 
 	}
 
+    //And the commands have been sent. Nothing else to do but hope that it works
 	protected void reloadControls() {
 		try {
 			controller.getDrone().move(roll, pitch, height, yaw);

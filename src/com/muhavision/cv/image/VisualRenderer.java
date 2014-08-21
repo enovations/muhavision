@@ -13,6 +13,9 @@ import com.muhavision.control.EulerAngles;
 import com.muhavision.control.FlightMode;
 import com.muhavision.cv.QuadrantFlowSpeed;
 
+//Some more graphics.
+//They provide nice hub that lags the shit out of your computer.
+
 public class VisualRenderer extends JPanel {
 
 	/**

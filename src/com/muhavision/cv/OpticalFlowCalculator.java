@@ -26,6 +26,8 @@ import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.helper.opencv_core.AbstractIplImage;
 import org.bytedeco.javacpp.helper.opencv_core.CvArr;
 
+//A class that calculates the speed of random points moving on different quadrants
+
 public class OpticalFlowCalculator {
 
 	BufferedImage prev = null;

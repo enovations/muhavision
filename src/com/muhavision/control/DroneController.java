@@ -13,6 +13,8 @@ import com.muhavision.cv.QuadrantFlowSpeed;
 import com.muhavision.cv.image.VisualRenderer;
 import com.muhavision.pid.PID;
 
+//Controlling the quad copter based on enabled mode
+
 public class DroneController {
 
 	PID roll = new PID(1, 1, 0, 10, PID.Direction.NORMAL);

@@ -3,6 +3,11 @@ package com.muhavision.control;
 /**
  * Created by ziga on 21.8.2014.
  */
+
+// ^ Selfish.
+
+//This class just calculates the exponential function for easier flight control
+
 public class ExpoController {
 
 	// If it crashes it's because of this + mami ne dotikaj se.
