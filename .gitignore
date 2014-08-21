@@ -15,15 +15,15 @@ hs_err_pid*
 *.settings
 *.properties
 
-.idea
-.idea/
+*.idea
+*.idea/
 lib/
 bin/
 local.properties
-.classpath
-.settings/
-.loadpath
-.iml
+*.classpath
+*.settings/
+*.loadpath
+*.iml
 
 out/production/MuhaVision/META-INF/MANIFEST.MF
 
