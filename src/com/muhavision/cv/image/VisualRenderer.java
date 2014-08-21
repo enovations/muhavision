@@ -1,5 +1,6 @@
 package com.muhavision.cv.image;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -58,7 +59,11 @@ public class VisualRenderer extends JPanel {
 		}
 		if (angles != null) {
 			//g.drawString("Mark. dist.: " + angles.dist, 250, 38);
-			g.fillRect(angles.picX, angles.picY, 4, 4);
+			g.setColor(Color.green);
+			g.fillRect(angles.picX, angles.picY, 5, 5);
+			g.setColor(Color.red);
+			g.fillRect(angles.picX2, angles.picY2, 5, 5);
+			g.setColor(Color.white);
 		}
 		
 		g.drawString("Roll: " + (int) global_main.roll, 30, 30);

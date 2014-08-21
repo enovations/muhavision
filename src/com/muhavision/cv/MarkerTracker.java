@@ -24,43 +24,37 @@ import org.bytedeco.javacpp.opencv_core.CvSize;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.helper.opencv_core.AbstractIplImage;
 import org.bytedeco.javacpp.helper.opencv_core.CvArr;
+import org.bytedeco.javacv.CanvasFrame;
 
 public class MarkerTracker {
 
-
-	//hsv h deliš z dve, s in v pomnožiš z 255
+	//red
+	//H:3.0 S:209.0 V:203.0 X:0.0
+	//H:8.0 S:211.0 V:174.0 X:0.0
+	//H:0.0 S:182.0 V:80.0 X:0.0
+	//H:2.0 S:181.0 V:203.0 X:0.0
+	//H:2.0 S:234.0 V:196.0 X:0.0
+	//H:4.0 S:232.0 V:181.0 X:0.0
+	//H:8.0 S:244.0 V:181.0 X:0.0
 	
 	//green
-	//85.0 S:149.0 V:192.0 X:0.0
-	//H:82.0 S:146.0 V:206.0 X:0.0
-	//H:83.0 S:101.0 V:192.0 X:0.0
-	//H:83.0 S:156.0 V:188.0 X:0.0
-	//H:83.0 S:160.0 V:178.0 X:0.0
-	//H:85.0 S:133.0 V:167.0 X:0.0
-	//
-	//H:82.0 S:111.0 V:206.0 X:0.0
-	//H:83.0 S:136.0 V:142.0 X:0.0
-	//H:76.0 S:106.0 V:199.0 X:0.0
+	//H:62.0 S:179.0 V:124.0 X:0.0
+	//H:63.0 S:167.0 V:127.0 X:0.0
+	//H:63.0 S:139.0 V:145.0 X:0.0
+	//H:67.0 S:204.0 V:80.0 X:0.0
+	//H:70.0 S:202.0 V:77.0 X:0.0
+	//H:63.0 S:166.0 V:106.0 X:0.0
+	//H:57.0 S:180.0 V:102.0 X:0.0
+	//H:71.0 S:183.0 V:131.0 X:0.0
+	//H:72.0 S:115.0 V:120.0 X:0.0
 	
-	//red
-	//H:0.0 S:128.0 V:160.0 X:0.0
-	//H:2.0 S:172.0 V:203.0 X:0.0
-	//H:2.0 S:172.0 V:203.0 X:0.0
-	//H:0.0 S:178.0 V:196.0 X:0.0
-	//H:2.0 S:172.0 V:203.0 X:0.0
-	//H:179.0 S:190.0 V:203.0 X:0.0
+	static CanvasFrame canvas = new CanvasFrame("Quad Cam Live");
 	
-	static CvScalar green_min = cvScalar(76, 105, 120, 0);
-	static CvScalar green_max = cvScalar(87, 183, 216, 0);
-		
-	static CvScalar red_min = cvScalar(0, 128, 160, 0);
-	static CvScalar red_max = cvScalar(2, 190, 203, 0);
-	
-	//static CvScalar green_min = cvScalar(60, 57, 81, 0);
-	//static CvScalar green_max = cvScalar(93, 158, 154, 0);
-	
-	//static CvScalar red_min = cvScalar(164, 84, 98, 0);
-	//static CvScalar red_max = cvScalar(4, 152, 184, 0);
+	static CvScalar green_min = cvScalar(47, 102, 65, 0);
+	static CvScalar green_max = cvScalar(85, 240, 160, 0);
+				
+	static CvScalar red_min   = cvScalar(0, 210, 120, 0);
+	static CvScalar red_max   = cvScalar(20, 255, 220, 0);
 	
 	public static EulerAngles getMarkerData(BufferedImage bufferedimg){
 		
@@ -71,8 +65,10 @@ public class MarkerTracker {
 			IplImage thrs_green = hsvThreshold(source, green_min, green_max);
 			IplImage thrs_red = hsvThreshold(source, red_min, red_max);
 			
-			cvErode(thrs_green, thrs_green, null, 3);
+			cvErode(thrs_green, thrs_green, null, 4);
 			//cvErode(thrs_red, thrs_red, null, 1);
+			
+			canvas.showImage(thrs_red);
 		
 			CvMoments moments_green = new CvMoments();
 			CvMoments moments_red = new CvMoments();
@@ -97,8 +93,8 @@ public class MarkerTracker {
         	angle.picX = posX_green;
         	angle.picY = posY_green;
         	
-        	//angle.picX = posX_red;
-        	//angle.picY = posY_red;
+        	angle.picX2 = posX_red;
+        	angle.picY2 = posY_red;
         	
         	return angle;
         
@@ -120,5 +116,37 @@ public class MarkerTracker {
         cvSmooth(imgThreshold, imgThreshold);
         return imgThreshold;
     }
+	
+	//hsv h deliš z dve, s in v pomnožiš z 255
+	
+		//green
+		//85.0 S:149.0 V:192.0 X:0.0
+		//H:82.0 S:146.0 V:206.0 X:0.0
+		//H:83.0 S:101.0 V:192.0 X:0.0
+		//H:83.0 S:156.0 V:188.0 X:0.0
+		//H:83.0 S:160.0 V:178.0 X:0.0
+		//H:85.0 S:133.0 V:167.0 X:0.0
+		//
+		//H:82.0 S:111.0 V:206.0 X:0.0
+		//H:83.0 S:136.0 V:142.0 X:0.0
+		//H:76.0 S:106.0 V:199.0 X:0.0
+		
+		//red
+		//H:0.0 S:128.0 V:160.0 X:0.0
+		//H:2.0 S:172.0 V:203.0 X:0.0
+		//H:2.0 S:172.0 V:203.0 X:0.0
+		//H:0.0 S:178.0 V:196.0 X:0.0
+		//H:2.0 S:172.0 V:203.0 X:0.0
+		//H:179.0 S:190.0 V:203.0 X:0.0
+		//
+		//H:167.0 S:127.0 V:203.0 X:0.0
+		//H:175.0 S:118.0 V:203.0 X:0.0
+		//H:167.0 S:127.0 V:203.0 X:0.0
+		
+		//static CvScalar green_min = cvScalar(76, 105, 120, 0);
+		//static CvScalar green_max = cvScalar(87, 183, 216, 0);
+			
+		//static CvScalar red_min = cvScalar(0, 128, 160, 0);
+		//static CvScalar red_max = cvScalar(2, 190, 203, 0);
 	
 }
