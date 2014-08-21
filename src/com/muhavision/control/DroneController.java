@@ -19,8 +19,6 @@ import com.muhavision.pid.PID;
 
 public class DroneController {
 
-	PID roll = new PID(1, 1, 0, 10, PID.Direction.NORMAL);
-
 	OpticalFlowCalculator calc = new OpticalFlowCalculator();
 
 	ARDrone drone = null;
@@ -67,8 +65,10 @@ public class DroneController {
 						if(visual.global_main.flightMode!=null)
 							if (visual.global_main.flightMode.getMode() == FlightMode.eMode.MUHA_MODE)
 								speed = calc.getFlowData(quadImage);
-							else if (visual.global_main.flightMode.getMode() == FlightMode.eMode.TAG_MODE)
+							else if (visual.global_main.flightMode.getMode() == FlightMode.eMode.TAG_MODE){
 								angle = MarkerTracker.getMarkerData(quadImage);
+								MarkerCalculator.calculateAndControl(angle, visual.global_main);
+							}
 
 						visual.reloadDatas(quadImage, speed, data, angle);
 						

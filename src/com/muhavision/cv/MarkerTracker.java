@@ -56,7 +56,7 @@ public class MarkerTracker {
 	//H:71.0 S:183.0 V:131.0 X:0.0
 	//H:72.0 S:115.0 V:120.0 X:0.0
 	
-	static CanvasFrame canvas = new CanvasFrame("Quad Cam Live");
+	//static CanvasFrame canvas = new CanvasFrame("Quad Cam Live");
 	
 	static int aa, bb, cc, dd, hh, ii;
 	
@@ -168,9 +168,7 @@ public class MarkerTracker {
 			
 			cvErode(thrs_green, thrs_green, null, 1);
 			cvErode(thrs_red, thrs_red, null, 2);
-			
-			//canvas.showImage(thrs_red);
-		
+					
 			CvMoments moments_green = new CvMoments();
 			CvMoments moments_red = new CvMoments();
 		
@@ -208,8 +206,8 @@ public class MarkerTracker {
         IplImage imgHSV = cvCreateImage(cvGetSize(orgImg), 8, 3);
         cvCvtColor(orgImg, imgHSV, CV_BGR2HSV);
         
-        CvScalar s=cvGet2D(imgHSV,120,160);                
-        System.out.println( "H:"+ s.val(0) + " S:" + s.val(1) + " V:" + s.val(2) + " X:" + s.val(3));//Print values
+        //CvScalar s=cvGet2D(imgHSV,120,160);                
+        //System.out.println( "H:"+ s.val(0) + " S:" + s.val(1) + " V:" + s.val(2) + " X:" + s.val(3));//Print values
         
         IplImage imgThreshold = cvCreateImage(cvGetSize(orgImg), 8, 1);
         cvInRangeS(imgHSV, min, max, imgThreshold);

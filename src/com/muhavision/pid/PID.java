@@ -26,7 +26,7 @@ public class PID {
 
 	int imax;
 
-	public PID(int p, int i, int d, int imax, int direction) {
+	public PID(float p, float i, float d, int imax, int direction) {
 		this.p = p;
 		this.i = i;
 		this.d = d;
