@@ -158,8 +158,10 @@ public class Main {
 
 						if (mami_array.length > 1) {
 
-							pitch = (float) (ExpoController.getExpo(Integer
+							if (visual.global_main.flightMode.getMode() != FlightMode.eMode.TAG_MODE)
+								pitch = (float) (ExpoController.getExpo(Integer
 									.parseInt(mami_array[1].trim())));
+							
 							roll = (float) (ExpoController.getExpo(Integer
 									.parseInt(mami_array[0].trim())));
 							
