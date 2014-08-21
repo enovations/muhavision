@@ -239,6 +239,14 @@ public class Main {
                         String[] mami_array = new String(packet.getData()).split("\\;");
 
                         if(mami_array.length>1){
+                        	
+                        	if(Integer.parseInt(mami_array[0].trim()) == 1){
+                            	try {
+            						controller.getDrone().sendEmergencySignal();
+            					} catch (IOException e) {
+            						e.printStackTrace();
+            					}
+                            }
 
                             if(Integer.parseInt(mami_array[2].trim()) == 1){
                                 try {
@@ -283,18 +291,6 @@ public class Main {
                             if(Integer.parseInt(mami_array[5].trim()) == 1){
                             	   controller.getDrone().setCombinedYawMode(false);
                             }
-                            
-                            if(Integer.parseInt(mami_array[0].trim()) == 1){
-                         	   try {
-								controller.getDrone().playAnimation(Animation.WAVE, 5);
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-
-
-
-
-                         }
                             
                         }
                     }
