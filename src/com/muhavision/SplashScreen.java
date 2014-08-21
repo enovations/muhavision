@@ -1,5 +1,6 @@
 package com.muhavision;
 
+//Beautiful imports
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -9,7 +10,10 @@ import javax.swing.JLabel;
 
 public class SplashScreen extends JFrame{
 
+    //Very nice loading screen
 	public SplashScreen() {
+
+        //Some graphic magic I don't want to know what it does.
 		setUndecorated(true);
 		setSize(600, 200);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,3 +42,4 @@ public class SplashScreen extends JFrame{
 	}
 	
 }
+//Done with graphics (for now).

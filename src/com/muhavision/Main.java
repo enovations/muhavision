@@ -10,6 +10,7 @@
 
 package com.muhavision;
 
+//Imports (obvious)
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -35,8 +36,9 @@ import com.codeminders.ardrone.ARDrone.Animation;
 import com.muhavision.control.DroneController;
 import com.muhavision.cv.image.VisualRenderer;
 
+//This is a class
 public class Main {
-	
+	//Graphics (don't know what it does)
 	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
 	
 	private final static int PACKETSIZE = 1024;
@@ -47,9 +49,9 @@ public class Main {
 	DroneController controller = new DroneController(visual);
 	
 	public static final boolean DEBUG = true;
-	
+
 	public Main() {
-		
+        //More graphics
 		if(!DEBUG) new SplashScreen();
 		
 		JPanel commands = new JPanel();
@@ -117,7 +119,9 @@ public class Main {
 		//controlTowerFrame.setResizable(false);
 		//controlTowerFrame.setSize(700, 500);
 		
-		//controlTowerFrame.setUndecorated(true);	
+		//controlTowerFrame.setUndecorated(true);
+
+        //Now graphics may be visible.
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		controlTowerFrame.setFocusable(true);
@@ -126,7 +130,8 @@ public class Main {
 		controlTowerFrame.addKeyListener(new KeyListener() {	
 			@Override public void keyTyped(KeyEvent arg0) {}
 			@Override public void keyReleased(KeyEvent arg0) {
-				
+
+                //Let's listen for some keys!!!
 				if(arg0.getKeyChar()=='w') pitch = 0;
 				if(arg0.getKeyChar()=='s') pitch = 0;
 				if(arg0.getKeyChar()=='a') roll = 0;
@@ -134,6 +139,8 @@ public class Main {
 				
 				reloadControls();
 			}
+
+            //Let's listen for some more keys!!!
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if(arg0.getKeyChar()=='\n')
@@ -160,7 +167,8 @@ public class Main {
 				
 			}
 		});
-		
+
+        //Now lets listen for mami!!!
 		try {
 		
 		final DatagramSocket socket = new DatagramSocket(1234);
@@ -168,7 +176,9 @@ public class Main {
 		Thread mami_listener = new Thread(){
 			
 			public void run(){
-				while(true){
+
+                //On port 1234 mami sends x,y,z,a axis.
+                while(true){
 					// x;y;z
 					DatagramPacket packet = new DatagramPacket( new byte[PACKETSIZE], PACKETSIZE ) ;
 		            try {
@@ -205,11 +215,12 @@ public class Main {
 		}
 
 
-
+        //Lets listen for some more mami!!!
         try {
 
             final DatagramSocket socket = new DatagramSocket(2345);
 
+            //On port 2345 mami sends button presses.
             Thread mami_listener = new Thread(){
 
                 public void run(){
@@ -279,10 +290,13 @@ public class Main {
         }
 
 
-		
+        //Let's listen for some mouse!!!
 		controlTowerFrame.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
+
+				//We don't do anything with mouse because we have MAMI!!!
+
 				/*int x = arg0.getX();
 				int w = (int) controlTowerFrame.getSize().getWidth();
 				int relative = (w/2) - x;
@@ -309,6 +323,8 @@ public class Main {
 		}
 	}
 
+
+    //Let's start this and mami!!!
 	public static void main(String[] args) {
 		new Main();
 

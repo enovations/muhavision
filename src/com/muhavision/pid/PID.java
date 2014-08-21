@@ -8,8 +8,10 @@
 
 package com.muhavision.pid;
 
+//PID controller!!!
 public class PID {
-	
+
+    //Some variables
 	float p,i,d;
 	float err;
 	long prevTime = -1;
