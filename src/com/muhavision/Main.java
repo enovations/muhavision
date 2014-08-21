@@ -34,6 +34,7 @@ import javax.swing.JPanel;
 
 import com.codeminders.ardrone.ARDrone.Animation;
 import com.muhavision.control.DroneController;
+import com.muhavision.control.FlightMode;
 import com.muhavision.cv.image.VisualRenderer;
 
 //This is a class
@@ -49,6 +50,8 @@ public class Main {
 	DroneController controller = new DroneController(visual);
 	
 	public static final boolean DEBUG = true;
+
+    public FlightMode flightMode = new FlightMode();
 
 	public Main() {
         //More graphics
@@ -275,6 +278,20 @@ public class Main {
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
+
+                            if(Integer.parseInt(mami_array[9].trim()) == 1){
+                                flightMode.setMode(FlightMode.eMode.NORMAL_MODE);
+                            }
+
+                            if(Integer.parseInt(mami_array[10].trim()) == 1){
+                                flightMode.setMode(FlightMode.eMode.MUHA_MODE);
+                            }
+
+                            if(Integer.parseInt(mami_array[11].trim()) == 1){
+                                flightMode.setMode(FlightMode.eMode.TAG_MODE);
+                            }
+
+
                          }
                             
                         }
