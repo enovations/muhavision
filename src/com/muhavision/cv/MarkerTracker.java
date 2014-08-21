@@ -169,7 +169,7 @@ public class MarkerTracker {
 			cvErode(thrs_green, thrs_green, null, 1);
 			cvErode(thrs_red, thrs_red, null, 2);
 			
-			canvas.showImage(thrs_red);
+			//canvas.showImage(thrs_red);
 		
 			CvMoments moments_green = new CvMoments();
 			CvMoments moments_red = new CvMoments();

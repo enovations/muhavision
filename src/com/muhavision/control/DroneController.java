@@ -29,8 +29,8 @@ public class DroneController {
 	BufferedImage quadImage = null;
 
 	public DroneController(final VisualRenderer visual) {
-		System.out.println("Drone controller loading...");
-		MarkerTracker.load();
+		//System.out.println("Drone controller loading...");
+		//MarkerTracker.load();
 		try {
 
 			drone = new ARDrone();
