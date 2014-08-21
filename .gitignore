@@ -23,7 +23,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
-MuhaVision.iml
+.iml
 
 out/production/MuhaVision/META-INF/MANIFEST.MF
 
