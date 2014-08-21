@@ -198,9 +198,9 @@ public class Main {
 																				// response
 							int mamih = Integer.parseInt(mami_array[3].trim());
 							if (mamih == 2)
-								height = -3;
+								height = -0.2f;
 							else if (mamih == -1)
-								height = 3;
+								height = 0.2f;
 							else
 								height = 0;
 
