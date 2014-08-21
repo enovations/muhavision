@@ -25,6 +25,6 @@ while 1:
 			MESSAGE = str(int(x)) + ';' + str(int(y)) + ';' + str(int(z)) + ';' + str(int(a)) + '\n\r'
 			sock.sendto(MESSAGE, (UDP_IP, UDP_PORT1))
 		if e.type == pygame.locals.JOYBUTTONDOWN: # 10
-			a, b, c, d, e, f = j.get_button(0), j.get_button(1), j.get_button(2), j.get_button(3), j.get_button(4), j.get_button(5)
-			MESSAGE = str(a) + ';' + str(b) + ';' + str(c) + ';' + str(d) + ';' + str(e) + ';' + str(f) + '\n\r'
+			a, b, c, d, e, f, g, h, i, v, k, l = j.get_button(0), j.get_button(1), j.get_button(2), j.get_button(3), j.get_button(4), j.get_button(5), j.get_button(6), j.get_button(7), j.get_button(8), j.get_button(9), j.get_button(10), j.get_button(11)
+			MESSAGE = str(a) + ';' + str(b) + ';' + str(c) + ';' + str(d) + ';' + str(e) + ';' + str(f) + ';' + str(g) + ';' + str(h) + ';' + str(i) + ';' + str(v) + ';' + str(k) + ';' + str(l) + '\n\r'
 			sock.sendto(MESSAGE, (UDP_IP, UDP_PORT2))
