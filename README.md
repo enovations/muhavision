@@ -1,4 +1,4 @@
-MuhaVision - Motherboard Universal Helicopter Aerodynamics Vision
+MuhaVision - Motherboard United Helicopter Aerodynamics Vision
 ==========
 
 ![img](https://raw.githubusercontent.com/DzinVision/MuhaVision/master/res/logo.png)
