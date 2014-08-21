@@ -54,10 +54,10 @@ public class VisualRenderer extends JPanel{
 	public void paintComponent(Graphics g_panel){
 		BufferedImage bimage = new BufferedImage(320, 240, BufferedImage.TYPE_INT_RGB);
 		Graphics g = bimage.getGraphics();
-		float diff = (((float)System.nanoTime() - prevData))/1000000000.0f;
-		prevData = System.nanoTime();
-		float fps = 1.0f/diff;
-		avgFps = (avgFps*filtT+fps)/(filtT+1);
+		//float diff = (((float)System.nanoTime() - prevData))/1000000000.0f;
+		//prevData = System.nanoTime();
+		//float fps = 1.0f/diff;
+		//avgFps = (avgFps*filtT+fps)/(filtT+1);
 		if(image!=null)
 			g.drawImage(image, 0, 0, this);
 		else
@@ -65,7 +65,7 @@ public class VisualRenderer extends JPanel{
 		g.setFont(new Font("Arial", Font.PLAIN, 10));
 		if(fdata!=null){
 			g.drawString("Battery: "+(int)fdata.getBattery(), 250, 30);
-			g.drawString("Speed: "+(int)fdata.getVx(), 250, 38);
+			//g.drawString("Speed: "+(int)fdata.getVx(), 250, 38);
 		}
 		g.drawString("Roll: "+(int)global_main.roll, 30, 30);
 		g.drawString("Pitch: "+(int)global_main.pitch, 30, 38);
@@ -75,36 +75,37 @@ public class VisualRenderer extends JPanel{
 		//g.drawLine(140, 50, 140, 190);
 		//g.drawLine(180, 50, 180, 190);
 		g.setColor(Color.red);
-		/*if(speed!=null){
+		if(speed!=null){
 			g.drawLine(80, 80, 80+(speed.lx*2), 80);
-			g.drawLine(80, 81, 80+(speed.lx*2), 81);
 			g.drawOval(80, 80, 5, 5);
 			
 			g.drawLine(200, 80, 200+(speed.rx*2), 80);
-			g.drawLine(200, 81, 200+(speed.rx*2), 81);
 			g.drawOval(200, 80, 5, 5);
 			
 			g.setColor(Color.pink);
 			
-			g.drawLine(140, 140, 140+((speed.rx-speed.lx)), 140);
-			g.drawLine(141, 141, 141+((speed.rx-speed.lx)), 141);
+			g.drawLine(140, 140, 140+(speed.rx-speed.lx), 140);
 			g.drawOval(140, 140, 5, 5);
-		}*/
-		Graphics2D g2d = (Graphics2D) g;
-		if(fdata!=null){
-			int roll = (int) fdata.getRoll();
-			int pitch = (int) fdata.getPitch();
-			g2d.setColor(Color.white);
-			g.drawOval(156, 116, 8, 8);
-			g2d.rotate(Math.toRadians(roll), 160, 120);
-			g2d.drawLine(90, 120, 230, 120);
-			//g2d.drawString("MUHA", 150, 80);
-			//g.drawLine(120, 50, 120, 190);
-			//g.drawLine(200, 50, 200, 190);
-			//g.drawOval(116, 116+(int)((float)(pitch)*1.3), 8, 8);
-			//g.drawOval(196, 116+(int)((float)(pitch)*1.3), 8, 8);
-			
 		}
+		Graphics2D g2d = (Graphics2D) g;
+		
+		int roll = 0;
+		int pitch = 0;
+		
+		if(fdata!=null){
+			roll = (int) fdata.getRoll();
+			pitch = (int) fdata.getPitch();
+		}
+		
+		g.setColor(Color.white);
+		g.drawOval(156, 116, 8, 8);
+		g.drawString("MUHA", 150, 80);
+		g.drawLine(120, 50, 120, 190);
+		g.drawLine(200, 50, 200, 190);
+		g.drawOval(116, 116+(int)((float)(pitch)*1.3), 8, 8);
+		g.drawOval(196, 116+(int)((float)(pitch)*1.3), 8, 8);
+		g2d.rotate(Math.toRadians(roll), 160, 120);
+		g2d.drawLine(90, 120, 230, 120);
 		/*	g.setColor(Color.green);
 			int cnt = 0;
 			for (Point p : speed.tmp2) {

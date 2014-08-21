@@ -103,22 +103,22 @@ public class OpticalFlowCalculator {
             cornersA.position(i);
             cornersB.position(i);
             int ax = (int) cornersA.x();
-            int ay = (int) cornersA.y();
+            //int ay = (int) cornersA.y();
             int bx = (int) cornersB.x();
-            int by = (int) cornersB.y();
+            //int by = (int) cornersB.y();
             if(ax<100){
-            	left.add(new VectorData(ax, ay, bx, by));
+            	left.add(new VectorData(ax, 0, bx, 0));//left.add(new VectorData(ax, ay, bx, by));
             	int dx = Math.abs(ax-bx);
-            	int dy = Math.abs(ay-by);
-            	float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
-            	avgsum_left += length;
+            	//int dy = Math.abs(ay-by);
+            	//float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+            	avgsum_left += dx;
             	left_number++;
             }else if(ax>220){
-            	right.add(new VectorData(ax, ay, bx, by));
+            	right.add(new VectorData(ax, 0, bx, 0));//right.add(new VectorData(ax, ay, bx, by));
             	int dx = Math.abs(ax-bx);
-            	int dy = Math.abs(ay-by);
-            	float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
-            	avgsum_right += length;
+            	//int dy = Math.abs(ay-by);
+            	//float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+            	avgsum_right += dx;
             	right_number++;
             }
         }
@@ -127,43 +127,43 @@ public class OpticalFlowCalculator {
         float avgr = avgsum_right/right_number;
         
         int avglx1_sum = 0;
-        int avgly1_sum = 0;
+        //int avgly1_sum = 0;
         int avglx2_sum = 0;
-        int avgly2_sum = 0;
+        //int avgly2_sum = 0;
         
         int vecltime = 0;
         
         if(left_number>0)
         	for(VectorData point : left){
         		int dx = Math.abs(point.x1 - point.x2);
-        		int dy = Math.abs(point.y1 - point.y2);
-        		float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
-        		if((length/avgl)<5){
+        		//int dy = Math.abs(point.y1 - point.y2);
+        		//float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+        		if((dx/avgl)<5){
         			avglx1_sum += point.x1;
         			avglx2_sum += point.x2;
-        			avgly1_sum += point.y1;
-        			avgly2_sum += point.y2;
+        			//avgly1_sum += point.y1;
+        			//avgly2_sum += point.y2;
         			vecltime++;
         		}
         	}
         
         int avgrx1_sum = 0;
-        int avgry1_sum = 0;
+        //int avgry1_sum = 0;
         int avgrx2_sum = 0;
-        int avgry2_sum = 0;
+        //int avgry2_sum = 0;
         
         int vecrtime = 0;
         
         if(right_number>0)
         	for(VectorData point : right){
         		int dx = Math.abs(point.x1 - point.x2);
-        		int dy = Math.abs(point.y1 - point.y2);
-        		float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
-        		if((length/avgr)<5){
+        		//int dy = Math.abs(point.y1 - point.y2);
+        		//float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
+        		if((dx/avgr)<5){
         			avgrx1_sum += point.x1;
         			avgrx2_sum += point.x2;
-        			avgry1_sum += point.y1;
-        			avgry2_sum += point.y2;
+        			//avgry1_sum += point.y1;
+        			//avgry2_sum += point.y2;
         			vecrtime++;
         		}
         	}
@@ -173,25 +173,25 @@ public class OpticalFlowCalculator {
         if(!(vecltime<=0 || vecrtime<=0)){
         	int avgl_x1 = avglx1_sum / vecltime;
         	int avgl_x2 = avglx2_sum / vecltime;
-        	int avgl_y1 = avgly1_sum / vecltime;
-        	int avgl_y2 = avgly2_sum / vecltime;
+        	//int avgl_y1 = avgly1_sum / vecltime;
+        	//int avgl_y2 = avgly2_sum / vecltime;
         	
         	int avgr_x1 = avgrx1_sum / vecrtime;
         	int avgr_x2 = avgrx2_sum / vecrtime;
-        	int avgr_y1 = avgry1_sum / vecrtime;
-        	int avgr_y2 = avgry2_sum / vecrtime;
+        	//int avgr_y1 = avgry1_sum / vecrtime;
+        	//int avgr_y2 = avgry2_sum / vecrtime;
         
         	int vec_l_x = avgl_x1 - avgl_x2;
-        	int vec_l_y = avgl_y1 - avgl_y2;
+        	//int vec_l_y = avgl_y1 - avgl_y2;
         
         	int vec_r_x = avgr_x1 - avgr_x2;
-        	int vec_r_y = avgr_y1 - avgr_y2;
+        	//int vec_r_y = avgr_y1 - avgr_y2;
         
         	speed.rx = vec_r_x;
-        	speed.ry = vec_r_y;
+        	//speed.ry = vec_r_y;
         
         	speed.lx = vec_l_x;
-        	speed.ly = vec_l_y;
+        	//speed.ly = vec_l_y;
         }
         
         //speed.tmp1 = tmp1;
