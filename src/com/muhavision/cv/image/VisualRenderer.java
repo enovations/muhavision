@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.Point;
 import com.muhavision.Main;
+import com.muhavision.control.EulerAngles;
+import com.muhavision.control.FlightMode;
 import com.muhavision.cv.QuadrantFlowSpeed;
 
 public class VisualRenderer extends JPanel{
@@ -28,8 +30,9 @@ public class VisualRenderer extends JPanel{
 	QuadrantFlowSpeed speed = new QuadrantFlowSpeed();
 	
 	NavData fdata = null;
+	EulerAngles angles = null;
 	
-	Main global_main = null;
+	public Main global_main = null;
 	
 	public VisualRenderer(Main main) {
 		this.global_main = main;
@@ -39,10 +42,11 @@ public class VisualRenderer extends JPanel{
 		data = ImageHelper.getScaledData(frame);
 	}
 	
-	public void reloadDatas(BufferedImage image, QuadrantFlowSpeed speed, NavData fdata){
+	public void reloadDatas(BufferedImage image, QuadrantFlowSpeed speed, NavData fdata, EulerAngles angles){
 		this.image = image;
 		this.speed = speed;
 		this.fdata = fdata;
+		this.angles = angles;
 		repaint();
 	}
 	
@@ -67,13 +71,15 @@ public class VisualRenderer extends JPanel{
 			g.drawString("Battery: "+(int)fdata.getBattery(), 250, 30);
 			//g.drawString("Speed: "+(int)fdata.getVx(), 250, 38);
 		}
+		if(angles!=null&&angles.hasAngles){
+			g.drawString("Mark. dist.: "+(int)angles.dist, 250, 38);
+			g.fillRect(angles.picX, angles.picY, 5, 5);
+		}
 		g.drawString("Roll: "+(int)global_main.roll, 30, 30);
 		g.drawString("Pitch: "+(int)global_main.pitch, 30, 38);
 		g.drawString("Yaw: "+(int)global_main.yaw, 30, 46);
 		g.drawString("Height: "+(int)global_main.height, 30, 54);
-		//g.setColor(Color.yellow);
-		//g.drawLine(140, 50, 140, 190);
-		//g.drawLine(180, 50, 180, 190);
+
 		g.setColor(Color.red);
 		if(speed!=null){
 			g.drawLine(80, 80, 80+(speed.lx*2), 80);
@@ -99,25 +105,16 @@ public class VisualRenderer extends JPanel{
 		
 		g.setColor(Color.white);
 		g.drawOval(156, 116, 8, 8);
-		g.drawString("MUHA", 150, 80);
+		if(global_main!=null){
+			g.drawString(FlightMode.getFlightModeName(global_main.flightMode.getMode()), 138, 80);
+		}
 		g.drawLine(120, 50, 120, 190);
 		g.drawLine(200, 50, 200, 190);
 		g.drawOval(116, 116+(int)((float)(pitch)*1.3), 8, 8);
 		g.drawOval(196, 116+(int)((float)(pitch)*1.3), 8, 8);
 		g2d.rotate(Math.toRadians(roll), 160, 120);
 		g2d.drawLine(90, 120, 230, 120);
-		/*	g.setColor(Color.green);
-			int cnt = 0;
-			for (Point p : speed.tmp2) {
-				g.drawOval(p.getX(), p.getY(), 3, 3);
-				cnt++;
-			}
-			g.setColor(Color.yellow);
-			for (int i = 0; i < cnt; i++) {
-				g.drawLine(speed.tmp1.get(i).getX(), speed.tmp1.get(i).getY(), speed.tmp2.get(i).getX(), speed.tmp2.get(i).getY());
-			}
-			
-		}*/
+
 		g_panel.drawImage(bimage, 0, 0, getWidth(), getHeight(), this);
 	}
 

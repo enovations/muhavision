@@ -199,8 +199,8 @@ public class Main {
 						yaw = (Integer.parseInt(mami_array[2].trim()))/5;//reduce response
 						if(Math.abs(yaw)==1)yaw=0;
 						int mamih = Integer.parseInt(mami_array[3].trim());
-						if(mamih==2) height = -10;
-						else if(mamih == -1) height = 10;
+						if(mamih==2) height = -20;
+						else if(mamih == -1) height = 20;
 						else height = 0;
 						
 						reloadControls();
@@ -279,15 +279,15 @@ public class Main {
 								e.printStackTrace();
 							}
 
-                            if(Integer.parseInt(mami_array[9].trim()) == 1){
+                            if(Integer.parseInt(mami_array[10].trim()) == 1){
                                 flightMode.setMode(FlightMode.eMode.NORMAL_MODE);
                             }
 
-                            if(Integer.parseInt(mami_array[10].trim()) == 1){
+                            if(Integer.parseInt(mami_array[8].trim()) == 1){
                                 flightMode.setMode(FlightMode.eMode.MUHA_MODE);
                             }
 
-                            if(Integer.parseInt(mami_array[11].trim()) == 1){
+                            if(Integer.parseInt(mami_array[6].trim()) == 1){
                                 flightMode.setMode(FlightMode.eMode.TAG_MODE);
                             }
 
@@ -328,7 +328,7 @@ public class Main {
 			@Override public void mouseDragged(MouseEvent arg0) {}
 		});
 		
-		visual.reloadDatas(null, null, null);
+		visual.reloadDatas(null, null, null, null);
 		visual.setDataProps(controlTowerFrame);
 	}
 	
@@ -344,7 +344,6 @@ public class Main {
     //Let's start this and mami!!!
 	public static void main(String[] args) {
 		new Main();
-
 	}
 
 }
