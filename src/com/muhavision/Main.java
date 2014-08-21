@@ -195,13 +195,12 @@ public class Main {
 					
 					if(mami_array.length>1){
 					
-						pitch = (float)ExpoController.getExpo(Integer.parseInt(mami_array[1].trim()));
-						roll  = (float)ExpoController.getExpo(Integer.parseInt(mami_array[0].trim()));
-						yaw   = (float)ExpoController.getExpo((Integer.parseInt(mami_array[2].trim())))/5.0f;//reduce response
-						if(Math.abs(yaw)==1)yaw=0;
+						pitch = (float)(ExpoController.getExpo(Integer.parseInt(mami_array[1].trim())));
+						roll  = (float)(ExpoController.getExpo(Integer.parseInt(mami_array[0].trim())));
+						yaw   = (float)(ExpoController.getExpo((Integer.parseInt(mami_array[2].trim())))/5.1);//reduce response
 						int mamih = Integer.parseInt(mami_array[3].trim());
-						if(mamih==2) height = -20;
-						else if(mamih == -1) height = 20;
+						if(mamih==2) height = -15;
+						else if(mamih == -1) height = 15;
 						else height = 0;
 						
 						reloadControls();
@@ -335,7 +334,7 @@ public class Main {
 	
 	protected void reloadControls() {
 		try {
-			controller.getDrone().move(roll, pitch, 0, yaw);
+			controller.getDrone().move(roll, pitch, height, yaw);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
