@@ -34,6 +34,7 @@ import javax.swing.JPanel;
 
 import com.codeminders.ardrone.ARDrone.Animation;
 import com.muhavision.control.DroneController;
+import com.muhavision.control.ExpoController;
 import com.muhavision.control.FlightMode;
 import com.muhavision.cv.image.VisualRenderer;
 
@@ -194,9 +195,9 @@ public class Main {
 					
 					if(mami_array.length>1){
 					
-						pitch = Integer.parseInt(mami_array[1].trim());
-						roll = Integer.parseInt(mami_array[0].trim());
-						yaw = (Integer.parseInt(mami_array[2].trim()))/5;//reduce response
+						pitch = (float)ExpoController.getExpo(Integer.parseInt(mami_array[1].trim()));
+						roll  = (float)ExpoController.getExpo(Integer.parseInt(mami_array[0].trim()));
+						yaw   = (float)ExpoController.getExpo((Integer.parseInt(mami_array[2].trim())))/5.0f;//reduce response
 						if(Math.abs(yaw)==1)yaw=0;
 						int mamih = Integer.parseInt(mami_array[3].trim());
 						if(mamih==2) height = -20;
