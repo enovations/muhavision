@@ -2,6 +2,8 @@ package com.muhavision.control;
 
 import com.muhavision.Main;
 
+//Do some PID stuff that controls stuff. A not of rantom numbers that nobady knows wat tey do.
+
 public class MarkerCalculator {
 	
 	static PID yaw = new PID(0.25f, 0, 0, 0, PID.Direction.NORMAL);
