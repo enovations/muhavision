@@ -7,7 +7,7 @@ import com.muhavision.Main;
 public class MarkerCalculator {
 
 	static PID yaw = new PID(0.25f, 0, 0, 0, PID.Direction.NORMAL);
-	static PID pitch = new PID(0.005f, 0, 0, 0, PID.Direction.NORMAL);
+	static PID pitch = new PID(0.01f, 0, 0, 0, PID.Direction.NORMAL);
 
 	public static void calculateAndControl(LocationData angles, Main main) {
 

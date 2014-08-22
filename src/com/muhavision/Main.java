@@ -51,6 +51,7 @@ public class Main {
 
 	public FlightMode flightMode = new FlightMode();
 
+
 	@SuppressWarnings("resource")
 	public Main() {
 		// More graphics
@@ -210,6 +211,7 @@ public class Main {
 							if (Integer.parseInt(mami_array[0].trim()) == 1) {
 								try {
 									controller.getDrone().sendEmergencySignal();
+                                    controller.getDrone().clearEmergencySignal();
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
