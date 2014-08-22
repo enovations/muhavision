@@ -47,7 +47,7 @@ public class Main {
 
 	DroneController controller = new DroneController(visual);
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	public FlightMode flightMode = new FlightMode();
 
