@@ -1,4 +1,4 @@
-package com.muhavision.cv.image;
+package com.muhavision;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.codeminders.ardrone.NavData;
-import com.muhavision.Main;
 import com.muhavision.control.EulerAngles;
 import com.muhavision.control.FlightMode;
 import com.muhavision.cv.QuadrantFlowSpeed;

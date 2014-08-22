@@ -1,7 +1,6 @@
 package com.muhavision.control;
 
 import com.muhavision.Main;
-import com.muhavision.pid.PID;
 
 public class MarkerCalculator {
 	

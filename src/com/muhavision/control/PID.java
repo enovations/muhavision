@@ -6,7 +6,7 @@
  * 
  */
 
-package com.muhavision.pid;
+package com.muhavision.control;
 
 //PID controller!!!
 public class PID {

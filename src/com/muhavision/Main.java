@@ -29,7 +29,6 @@ import javax.swing.JPanel;
 import com.muhavision.control.DroneController;
 import com.muhavision.control.ExpoController;
 import com.muhavision.control.FlightMode;
-import com.muhavision.cv.image.VisualRenderer;
 
 //This is a class
 public class Main {

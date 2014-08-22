@@ -9,11 +9,10 @@ import com.codeminders.ardrone.ARDrone;
 import com.codeminders.ardrone.NavData;
 import com.codeminders.ardrone.NavDataListener;
 import com.codeminders.ardrone.util.BufferedImageVideoListener;
+import com.muhavision.VisualRenderer;
 import com.muhavision.cv.MarkerTracker;
 import com.muhavision.cv.OpticalFlowCalculator;
 import com.muhavision.cv.QuadrantFlowSpeed;
-import com.muhavision.cv.image.VisualRenderer;
-import com.muhavision.pid.PID;
 
 //Controlling the quad copter based on enabled mode
 

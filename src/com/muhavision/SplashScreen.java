@@ -30,21 +30,11 @@ public class SplashScreen extends JFrame {
 				- getSize().height / 2);
 		add(new JLabel(new ImageIcon("./res/logo.png")));
 		setVisible(true);
-		for (int i = 0; i < 5; i++) {
-			setLocation(
-					(dim.width / 2 - getSize().width / 2)
-							+ ((int) (Math.random() * 1000) - 500),
-					(dim.height / 2 - getSize().height / 2)
-							+ ((int) (Math.random() * 1000) - 500));
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		try {
+			Thread.sleep(8000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		setLocation(dim.width / 2 - getSize().width / 2, dim.height / 2
-				- getSize().height / 2);
-		add(new JLabel(new ImageIcon("./res/logo.png")));
 		setVisible(false);
 	}
 
