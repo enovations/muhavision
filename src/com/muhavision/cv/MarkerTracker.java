@@ -26,10 +26,11 @@ import org.bytedeco.javacpp.opencv_imgproc.CvMoments;
 import org.bytedeco.javacpp.helper.opencv_core.AbstractIplImage;
 
 import com.muhavision.control.LocationData;
+import org.bytedeco.javacv.CanvasFrame;
 
 public class MarkerTracker {
 
-	// static CanvasFrame canvas = new CanvasFrame("Quad Cam Live");
+	static CanvasFrame canvas = new CanvasFrame("Quad Cam Live");
 
 	static int aa, bb, cc, dd, hh, ii;
 
@@ -59,8 +60,11 @@ public class MarkerTracker {
 			IplImage thrs_green = hsvThreshold(source, green_min, green_max);
 			IplImage thrs_red = hsvThreshold(source, red_min, red_max);
 
+
 			cvErode(thrs_green, thrs_green, null, 1);
 			cvErode(thrs_red, thrs_red, null, 2);
+
+            canvas.showImage(thrs_green);
 
 			CvMoments moments_green = new CvMoments();
 			CvMoments moments_red = new CvMoments();
