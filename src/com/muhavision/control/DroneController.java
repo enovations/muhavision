@@ -12,7 +12,6 @@ import com.codeminders.ardrone.util.BufferedImageVideoListener;
 import com.muhavision.VisualRenderer;
 import com.muhavision.cv.MarkerTracker;
 import com.muhavision.cv.OpticalFlowCalculator;
-import com.muhavision.cv.QuadrantFlowSpeed;
 
 //Controlling the quad copter based on enabled mode
 
@@ -22,12 +21,10 @@ public class DroneController {
 
 	ARDrone drone = null;
 	NavData data = null;
-	
+
 	BufferedImage quadImage = null;
 
 	public DroneController(final VisualRenderer visual) {
-		//System.out.println("Drone controller loading...");
-		//MarkerTracker.load();
 		try {
 
 			drone = new ARDrone();
@@ -44,45 +41,47 @@ public class DroneController {
 			});
 
 			drone.addNavDataListener(new NavDataListener() {
-				
+
 				@Override
 				public void navDataReceived(NavData fdata) {
 					data = fdata;
 				}
 			});
-			
-			Thread t = new Thread(){
-				
-				public void run(){
-					while(true){
-						
-						long millis = System.currentTimeMillis();
-						
-						QuadrantFlowSpeed speed = null;
-						EulerAngles angle = null;
 
-						if(visual.global_main.flightMode!=null)
+			Thread t = new Thread() {
+
+				@Override
+				public void run() {
+					while (true) {
+
+						long millis = System.currentTimeMillis();
+
+						LocationData speed = null;
+						LocationData angle = null;
+
+						if (visual.global_main.flightMode != null)
 							if (visual.global_main.flightMode.getMode() == FlightMode.eMode.MUHA_MODE)
 								speed = calc.getFlowData(quadImage);
-							else if (visual.global_main.flightMode.getMode() == FlightMode.eMode.TAG_MODE){
+							else if (visual.global_main.flightMode.getMode() == FlightMode.eMode.TAG_MODE) {
 								angle = MarkerTracker.getMarkerData(quadImage);
-								MarkerCalculator.calculateAndControl(angle, visual.global_main);
+								MarkerCalculator.calculateAndControl(angle,
+										visual.global_main);
 							}
 
 						visual.reloadDatas(quadImage, speed, data, angle);
-						
+
 						millis = System.currentTimeMillis() - millis;
-						
+
 						try {
-							if(millis<70)
-								Thread.sleep(70-millis);
+							if (millis < 70)
+								Thread.sleep(70 - millis);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						
+
 					}
 				}
-				
+
 			};
 			t.start();
 

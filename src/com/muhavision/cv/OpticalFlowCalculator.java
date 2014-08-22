@@ -26,6 +26,8 @@ import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.helper.opencv_core.AbstractIplImage;
 import org.bytedeco.javacpp.helper.opencv_core.CvArr;
 
+import com.muhavision.control.LocationData;
+
 //A class that calculates the speed of random points moving on different quadrants
 
 public class OpticalFlowCalculator {
@@ -34,12 +36,12 @@ public class OpticalFlowCalculator {
 
 	private static final int MAX_CORNERS = 190;
 
-	public QuadrantFlowSpeed getFlowData(BufferedImage curr) {
+	public LocationData getFlowData(BufferedImage curr) {
 
 		// first time
 		if (prev == null) {
 			prev = curr;
-			return new QuadrantFlowSpeed();
+			return new LocationData();
 		}
 
 		IplImage current_color = AbstractIplImage.createFrom(curr);
@@ -87,8 +89,8 @@ public class OpticalFlowCalculator {
 				features_found, feature_errors,
 				cvTermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 20, 0.3), 0);
 
-		Vector<VectorData> left = new Vector<VectorData>();
-		Vector<VectorData> right = new Vector<VectorData>();
+		Vector<LocationData> left = new Vector<LocationData>();
+		Vector<LocationData> right = new Vector<LocationData>();
 
 		float avgsum_left = 0;
 		float left_number = 0;
@@ -101,23 +103,21 @@ public class OpticalFlowCalculator {
 			}
 			cornersA.position(i);
 			cornersB.position(i);
+
 			int ax = (int) cornersA.x();
-			// int ay = (int) cornersA.y();
+			int ay = (int) cornersA.y();
 			int bx = (int) cornersB.x();
-			// int by = (int) cornersB.y();
+			int by = (int) cornersB.y();
+
 			if (ax < 100) {
-				left.add(new VectorData(ax, 0, bx, 0));// left.add(new
-														// VectorData(ax, ay,
-														// bx, by));
+				left.add(new LocationData(ax, ay, bx, by));
 				int dx = Math.abs(ax - bx);
 				// int dy = Math.abs(ay-by);
 				// float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
 				avgsum_left += dx;
 				left_number++;
 			} else if (ax > 220) {
-				right.add(new VectorData(ax, 0, bx, 0));// right.add(new
-														// VectorData(ax, ay,
-														// bx, by));
+				right.add(new LocationData(ax, ay, bx, by));
 				int dx = Math.abs(ax - bx);
 				// int dy = Math.abs(ay-by);
 				// float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
@@ -137,7 +137,7 @@ public class OpticalFlowCalculator {
 		int vecltime = 0;
 
 		if (left_number > 0)
-			for (VectorData point : left) {
+			for (LocationData point : left) {
 				int dx = Math.abs(point.x1 - point.x2);
 				// int dy = Math.abs(point.y1 - point.y2);
 				// float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
@@ -158,7 +158,7 @@ public class OpticalFlowCalculator {
 		int vecrtime = 0;
 
 		if (right_number > 0)
-			for (VectorData point : right) {
+			for (LocationData point : right) {
 				int dx = Math.abs(point.x1 - point.x2);
 				// int dy = Math.abs(point.y1 - point.y2);
 				// float length = (float) Math.sqrt(((dx*dx) + (dy*dy)));
@@ -171,7 +171,7 @@ public class OpticalFlowCalculator {
 				}
 			}
 
-		QuadrantFlowSpeed speed = new QuadrantFlowSpeed();
+		LocationData speed = new LocationData();
 
 		if (!(vecltime <= 0 || vecrtime <= 0)) {
 			int avgl_x1 = avglx1_sum / vecltime;
@@ -196,9 +196,6 @@ public class OpticalFlowCalculator {
 			speed.lx = vec_l_x;
 			// speed.ly = vec_l_y;
 		}
-
-		// speed.tmp1 = tmp1;
-		// speed.tmp2 = tmp2;
 
 		prev = curr;
 

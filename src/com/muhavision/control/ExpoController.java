@@ -6,7 +6,7 @@ package com.muhavision.control;
 
 // ^ Selfish.
 
-//This class just calculates the exponential function for easier flight control
+// This class just calculates the exponential function for easier flight control
 
 public class ExpoController {
 

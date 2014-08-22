@@ -33,7 +33,7 @@ import com.muhavision.control.FlightMode;
 //This is a class
 public class Main {
 	// Graphics (don't know what it does)
-	JFrame controlTowerFrame = new JFrame("Muha Mission Planner");
+	JFrame controlTowerFrame = new JFrame("MUHA Mission Planner");
 
 	private final static int PACKETSIZE = 1024;
 
@@ -51,6 +51,7 @@ public class Main {
 
 	public FlightMode flightMode = new FlightMode();
 
+	@SuppressWarnings("resource")
 	public Main() {
 		// More graphics
 		if (!DEBUG)
@@ -116,18 +117,9 @@ public class Main {
 		trim.setFocusable(false);
 		commands.add(trim);
 
-		//controlTowerFrame.add("North", commands);
-
-		// controlTowerFrame.setResizable(false);
-		// controlTowerFrame.setSize(700, 500);
-
-		// controlTowerFrame.setUndecorated(true);
-
 		// Now graphics may be visible.
 		controlTowerFrame.setVisible(true);
 		controlTowerFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
-		// controlTowerFrame.setFocusable(true);
-		// controlTowerFrame.setFocusableWindowState(true);
 		controlTowerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Now lets listen for mami!!!
@@ -159,22 +151,20 @@ public class Main {
 
 							if (visual.global_main.flightMode.getMode() != FlightMode.eMode.TAG_MODE)
 								pitch = (float) (ExpoController.getExpo(Integer
-									.parseInt(mami_array[1].trim())));
-							
+										.parseInt(mami_array[1].trim())));
+
 							roll = (float) (ExpoController.getExpo(Integer
 									.parseInt(mami_array[0].trim())));
-							
+
 							if (visual.global_main.flightMode.getMode() != FlightMode.eMode.TAG_MODE)
 								yaw = (float) (ExpoController.getExpo((Integer
-									.parseInt(mami_array[2].trim()))) / 4.7);// reduce
-																				// response
-							
-							
+										.parseInt(mami_array[2].trim()))) / 4.7);
+
 							int mamih = Integer.parseInt(mami_array[3].trim());
 							if (mamih == 2)
-								height = -0.2f;
+								height = -0.28f;
 							else if (mamih == -1)
-								height = 0.2f;
+								height = 0.28f;
 							else
 								height = 0;
 
@@ -203,7 +193,7 @@ public class Main {
 				@Override
 				public void run() {
 					while (true) {
-						// x;y;z
+
 						DatagramPacket packet = new DatagramPacket(
 								new byte[PACKETSIZE], PACKETSIZE);
 						try {
@@ -283,12 +273,10 @@ public class Main {
 		}
 
 		visual.reloadDatas(null, null, null, null);
-		
-		flightMode.setMode(FlightMode.eMode.TAG_MODE);
-
 	}
 
-    //And the commands have been sent. Nothing else to do but hope that it works
+	// And the commands have been sent. Nothing else to do but hope that it
+	// works
 	public void reloadControls() {
 		try {
 			controller.getDrone().move(roll, pitch, height, yaw);
