@@ -1,6 +1,7 @@
 package com.muhavision.cv;
 
 import static org.bytedeco.javacpp.opencv_imgproc.*;
+import static org.bytedeco.javacpp.opencv_highgui.*;
 
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
@@ -24,15 +25,13 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.bytedeco.javacpp.BytePointer;
-import org.bytedeco.javacpp.FloatPointer;
-import org.bytedeco.javacpp.IntPointer;
+import org.bytedeco.javacpp.*;
 import org.bytedeco.javacpp.opencv_core.CvPoint2D32f;
 import org.bytedeco.javacpp.opencv_core.CvSize;
 import org.bytedeco.javacpp.opencv_core.IplImage;
-import org.bytedeco.javacpp.helper.opencv_core.AbstractIplImage;
-import org.bytedeco.javacpp.helper.opencv_core.CvArr;
-import org.bytedeco.javacv.CanvasFrame;
+import org.bytedeco.javacpp.helper.opencv_core.*;
+import org.bytedeco.javacpp.helper.*;
+import org.bytedeco.javacv.*;
 
 public class MarkerTracker {
 
@@ -56,11 +55,11 @@ public class MarkerTracker {
 	//H:71.0 S:183.0 V:131.0 X:0.0
 	//H:72.0 S:115.0 V:120.0 X:0.0
 	
-	//static CanvasFrame canvas = new CanvasFrame("Quad Cam Live");
+	static CanvasFrame canvas = new CanvasFrame("Quad Cam Live");
 	
 	static int aa, bb, cc, dd, hh, ii;
 	
-	static CvScalar green_min = cvScalar(156, 104, 27, 0);
+	static CvScalar green_min = cvScalar(156, 120, 27, 0);
 	static CvScalar green_max = cvScalar(180, 255, 255, 0);
 	//static CvScalar green_min = cvScalar(aa,bb,cc, 0);
 	//static CvScalar green_max = cvScalar(dd,hh,ii, 0);
@@ -161,13 +160,19 @@ public class MarkerTracker {
 		
 		if(bufferedimg!=null){
 		
-			IplImage source = AbstractIplImage.createFrom(bufferedimg);
+			IplImage sourceRGB = AbstractIplImage.createFrom(bufferedimg);
 		
+			IplImage source = cvCreateImage(cvGetSize(sourceRGB), 8, 3);
+			
+			cvCvtColor(sourceRGB, source, CV_BGR2HSV);
+			
 			IplImage thrs_green = hsvThreshold(source, green_min, green_max);
 			IplImage thrs_red = hsvThreshold(source, red_min, red_max);
 			
 			cvErode(thrs_green, thrs_green, null, 1);
 			cvErode(thrs_red, thrs_red, null, 2);
+			
+			canvas.showImage(thrs_red);
 					
 			CvMoments moments_green = new CvMoments();
 			CvMoments moments_red = new CvMoments();
@@ -186,6 +191,45 @@ public class MarkerTracker {
         	double area_red = cvGetCentralMoment(moments_red, 0, 0);
         	int posX_red = (int) (mom10_red / area_red);
         	int posY_red = (int) (mom01_red / area_red);
+						
+			/*ObjectFinder.Settings sett = new ObjectFinder.Settings();
+			
+			//sett.setThresholdWindowMax(150);
+			//sett.setThresholdKBlackMarkers(0.8);
+			
+			ObjectFinder detector = new ObjectFinder(sett);
+			
+			IplImage current_color = AbstractIplImage.createFrom(bufferedimg);
+
+			IplImage current = AbstractIplImage.create(current_color.width(),
+					current_color.height(), IPL_DEPTH_8U, 1);
+
+			cvCvtColor(current_color, current, CV_BGR2GRAY);
+
+			CvSize velikost = cvGetSize(current);
+
+			IplImage eig_image = cvCreateImage(velikost, IPL_DEPTH_32F, 1);
+			IplImage tmp_image = cvCreateImage(velikost, IPL_DEPTH_32F, 1);
+			
+			IplImage image = cvLoadImage("marker.png",CV_LOAD_IMAGE_GRAYSCALE);
+			
+			sett.setObjectImage(image);
+			sett.setUseFLANN(true);
+			
+			double[] dst_corners = detector.find(current);
+			
+			for (int i = 0; i < dst_corners.length; i++) {
+				System.out.print(dst_corners+" : ");
+			}
+			System.out.println("-");
+			
+			//Marker[] markers = detector.detect(sourceRGB, false);
+			
+			//canvas.showImage(detector.getThresholdedImage());
+			
+			//for (int i = 0; i < markers.length; i++) {
+			//	System.out.println("markerck");
+			//}*/
         	
         	EulerAngles angle = new EulerAngles();
         	
@@ -203,16 +247,15 @@ public class MarkerTracker {
 	}
 	
 	static IplImage hsvThreshold(IplImage orgImg, CvScalar min, CvScalar max) {
-        IplImage imgHSV = cvCreateImage(cvGetSize(orgImg), 8, 3);
-        cvCvtColor(orgImg, imgHSV, CV_BGR2HSV);
+        //IplImage imgHSV = cvCreateImage(cvGetSize(orgImg), 8, 3);
         
-        //CvScalar s=cvGet2D(imgHSV,120,160);                
-        //System.out.println( "H:"+ s.val(0) + " S:" + s.val(1) + " V:" + s.val(2) + " X:" + s.val(3));//Print values
+        CvScalar s=cvGet2D(orgImg,120,160);               
+        System.out.println( "H:"+ s.val(0) + " S:" + s.val(1) + " V:" + s.val(2) + " X:" + s.val(3));//Print values
         
         IplImage imgThreshold = cvCreateImage(cvGetSize(orgImg), 8, 1);
-        cvInRangeS(imgHSV, min, max, imgThreshold);
-        cvReleaseImage(imgHSV);
-        cvSmooth(imgThreshold, imgThreshold);
+        cvInRangeS(orgImg, min, max, imgThreshold);
+        //cvReleaseImage(orgImg);
+        //cvSmooth(imgThreshold, imgThreshold);
         return imgThreshold;
     }
 	
